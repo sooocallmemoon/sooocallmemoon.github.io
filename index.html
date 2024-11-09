@@ -87,6 +87,14 @@ Free Bootstrap 5 HTML Template
         </nav>
 
         <main>
+<section class="welcome-message bg-light py-4 text-center position-relative" id="welcomeMessage">
+    <div class="container">
+        <button class="btn-close position-absolute top-0 end-0 m-3" aria-label="Close" onclick="closeWelcomeMessage()"></button> <!-- Bouton de fermeture -->
+        <h2 class="text-warning">Bonne rentrée à tous !</h2>
+        <p>Bienvenue sur le site du collège François Mitterrand, nous sommes ravis de vous accueillir pour cette nouvelle année scolaire.</p>
+    </div>
+</section>
+
 
             <section class="hero">
                 <div class="container-fluid h-100">
@@ -123,14 +131,6 @@ Free Bootstrap 5 HTML Template
                     </div>
                 </div>
             </section>
-
-<section class="welcome-message bg-light py-4 text-center">
-    <div class="container">
-        <h2 class="text-warning">Bonne rentrée à tous !</h2>
-        <p>Bienvenue sur le site du collège François Mitterrand, nous sommes ravis de vous accueillir pour cette nouvelle année scolaire.</p>
-    </div>
-</section>
-
 
             <section class="about section-padding text-center" id="section_2">
     <div class="container">
@@ -254,6 +254,12 @@ Free Bootstrap 5 HTML Template
         <script src="js/magnific-popup-options.js"></script>
         <script src="js/click-scroll.js"></script>
         <script src="js/custom.js"></script>
+        <script>
+    function closeWelcomeMessage() {
+        document.getElementById('welcomeMessage').style.display = 'none';
+    }
+</script>
+
 
     </body>
 </html>
