@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Gestion des serveurs</title>
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 220px;
+    height: 100vh;
+    background-color: #2e7d32;
+    color: white;
+    position: fixed;
+    padding-top: 20px;
+}
+
+.sidebar h2 {
+    text-align: center;
+}
+
+.sidebar a {
+    display: block;
+    color: white;
+    padding: 12px;
+    text-decoration: none;
+}
+
+.sidebar a:hover {
+    background-color: #1b5e20;
+}
+
+/* Header */
+.header {
+    margin-left: 220px;
+    background-color: #4caf50;
+    padding: 15px;
+    color: white;
+}
+
+/* Content */
+.content {
+    margin-left: 220px;
+    padding: 20px;
+}
+
+/* Cards */
+.card {
+    background: white;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* Hidden content */
+#protected {
+    display: none;
+}
+
+/* Login box */
+.login-box {
+    text-align: center;
+    margin-top: 100px;
+}
+
+input {
+    padding: 10px;
+    margin: 10px;
+}
+
+button {
+    padding: 10px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="sidebar">
+    <h2>PRONOTE</h2>
+    <a href="#">Accueil</a>
+    <a href="gestion.html">Serveur PRONOTE</a>
+    <a href="clients.html">Clients</a>
+    <a href="gestion.html">PRONOTE.net</a>
+</div>
+  
+<div class="header">
+    <h1>Gestion des données établissement</h1>
+</div>
+
+  <div class="card">
+        <h3>Attention !</h3>
+        <p>Cette page recense les informations pouvant être indiscrètes.</p>
+        <p>Un mot de passe est nécessaire.</p>
+  </div>
+
+<!-- 🔐 Login -->
+<div class="login-box" id="loginBox">
+    <h2>Accès sécurisé</h2>
+    <input type="password" id="password" placeholder="Mot de passe">
+    <br>
+    <button onclick="checkPassword()">Se connecter</button>
+    <p id="error" style="color:red;"></p>
+</div>
+
+<!-- 🔒 Contenu protégé -->
+<div id="protected">
+
+<div class="content">
+
+    <div class="card">
+        <h3>Informations établissement</h3>
+        <p><strong>Nom du chef d'établissement :</strong> Monsieur LEFEVRE Jonathan</p>
+        <p><strong>Adresse :</strong> 55 RUE DU FAUBOURG SAINT HONORE (80000 AMIENS)</p>
+        <p><strong>Téléphone :</strong> Aucun téléphone</p>
+        <p><strong>Email :</strong> ce.0800456l@pedagogie.groupe-citadelle.fr</p>
+    </div>
+      <div class="card">
+        <h3>Vos informations d'hébergement</h3>
+        <p>Numéro d'hébergement : 106403894051</p>
+        <p>Référent de l'hébergement : M. LEFEVRE Jonathan</p>
+    </div>
+
+    <div class="card">
+        <h3>Accès privés</h3>
+        <p>
+            <a href="https://pronote.oxoomy.fr">PRONOTE.net</a><br>
+            <a href="https://hebergement.oxoomy.fr">Administrer le serveur</a><br>
+            <a href="https://intranet.oxoomy.fr">Administration</a>
+        </p>
+    </div>
+
+</div>
+</div>
+
+<script>
+function checkPassword() {
+    var pwd = document.getElementById("password").value;
+    var correctPassword = "sexe"; // 🔑 change ici
+
+    if (pwd === correctPassword) {
+        document.getElementById("protected").style.display = "block";
+        document.getElementById("loginBox").style.display = "none";
+    } else {
+        document.getElementById("error").innerText = "Le mot de passe est incorrect";
+    }
+}
+</script>
+
+</body>
+</html>
