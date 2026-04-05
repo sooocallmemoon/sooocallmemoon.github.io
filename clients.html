@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Clients</title>
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 220px;
+    height: 100vh;
+    background-color: #2e7d32;
+    color: white;
+    position: fixed;
+    padding-top: 20px;
+}
+
+.sidebar h2 {
+    text-align: center;
+}
+
+.sidebar a {
+    display: block;
+    color: white;
+    padding: 12px;
+    text-decoration: none;
+}
+
+.sidebar a:hover {
+    background-color: #1b5e20;
+}
+
+/* Header */
+.header {
+    margin-left: 220px;
+    background-color: #4caf50;
+    padding: 15px;
+    color: white;
+}
+
+/* Content */
+.content {
+    margin-left: 220px;
+    padding: 20px;
+}
+
+/* Cards */
+.card {
+    background: white;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* Buttons */
+.button {
+    display: inline-block;
+    margin-top: 10px;
+    background-color: #4caf50;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.button:hover {
+    background-color: #388e3c;
+}
+</style>
+</head>
+
+<body>
+
+<div class="sidebar">
+    <h2>PRONOTE</h2>
+    <a href="index.html">Accueil</a>
+    <a href="clients.html">Clients</a>
+</div>
+
+<div class="header">
+    <h1>Accès aux Clients</h1>
+</div>
+
+<div class="content">
+
+    <div class="card">
+        <h3>Client PRONOTE</h3>
+        <p>Accéder à l'interface PRONOTE pour les utilisateurs.</p>
+        <a class="button" href="https://www.index-education.com/fr/pronote.php" target="_blank">
+            Ouvrir PRONOTE
+        </a>
+    </div>
+
+    <div class="card">
+        <h3>Client EDT</h3>
+        <p>Accéder à l'application EDT (Emploi du Temps).</p>
+        <a class="button" href="https://www.index-education.com/fr/edt.php" target="_blank">
+            Ouvrir EDT
+        </a>
+    </div>
+
+</div>
+
+</body>
+</html>
