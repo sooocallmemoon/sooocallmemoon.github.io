@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<title>Gestion des serveurs</title>
+<title>Gestion des serveurs PRONOTE</title>
 <style>
 body {
     margin: 0;
@@ -100,8 +100,7 @@ button {
 
   <div class="card">
         <h3>Attention !</h3>
-        <p>Cette page recense les informations pouvant être indiscrètes.</p>
-        <p>Un mot de passe est nécessaire.</p>
+        <p>Cette page recense des informations sensibles.</p>
   </div>
 
 <!-- 🔐 Login -->
@@ -109,7 +108,7 @@ button {
     <h2>Accès sécurisé</h2>
     <input type="password" id="password" placeholder="Mot de passe">
     <br>
-    <button onclick="checkPassword()">Se connecter</button>
+    <button onclick="checkPassword()">Se connecter à la plateforme</button>
     <p id="error" style="color:red;"></p>
 </div>
 
@@ -120,10 +119,12 @@ button {
 
     <div class="card">
         <h3>Informations établissement</h3>
-        <p><strong>Nom du chef d'établissement :</strong> Monsieur LEFEVRE Jonathan</p>
+        <p><strong>Nom de l'établissement :</strong> CITE SCOLAIRE FRANÇOIS MITTERRAND</p>
+        <p><strong>Unité Administrative Immatriculée (UAI) :</strong> 0800456L</p>
         <p><strong>Adresse :</strong> 55 RUE DU FAUBOURG SAINT HONORE (80000 AMIENS)</p>
-        <p><strong>Téléphone :</strong> Aucun téléphone</p>
+        <p><strong>Téléphone :</strong> Aucun numéro a été transmis</p>
         <p><strong>Email :</strong> ce.0800456l@pedagogie.groupe-citadelle.fr</p>
+        <p><strong>Chef d'établissement : </strong>M. LEFEVRE Jonathan</p>
     </div>
       <div class="card">
         <h3>Vos informations d'hébergement</h3>
@@ -132,11 +133,10 @@ button {
     </div>
 
     <div class="card">
-        <h3>Accès privés</h3>
+        <h3>Liens utiles</h3>
         <p>
             <a href="https://pronote.oxoomy.fr">PRONOTE.net</a><br>
             <a href="https://hebergement.oxoomy.fr">Administrer le serveur</a><br>
-            <a href="https://intranet.oxoomy.fr">Administration</a>
         </p>
     </div>
 
@@ -146,7 +146,7 @@ button {
 <script>
 function checkPassword() {
     var pwd = document.getElementById("password").value;
-    var correctPassword = "sexe"; // 🔑 change ici
+    var correctPassword = "0800456L"; // 🔑 change ici
 
     if (pwd === correctPassword) {
         document.getElementById("protected").style.display = "block";
