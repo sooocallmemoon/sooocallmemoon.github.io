@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Dashboard type Pronote</title>
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 220px;
+    height: 100vh;
+    background-color: #2e7d32;
+    color: white;
+    position: fixed;
+    padding-top: 20px;
+}
+
+.sidebar h2 {
+    text-align: center;
+}
+
+.sidebar a {
+    display: block;
+    color: white;
+    padding: 12px;
+    text-decoration: none;
+}
+
+.sidebar a:hover {
+    background-color: #1b5e20;
+}
+
+/* Header */
+.header {
+    margin-left: 220px;
+    background-color: #4caf50;
+    padding: 15px;
+    color: white;
+}
+
+/* Content */
+.content {
+    margin-left: 220px;
+    padding: 20px;
+}
+
+/* Cards */
+.card {
+    background: white;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* Buttons */
+button {
+    background-color: #4caf50;
+    border: none;
+    padding: 10px;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #388e3c;
+}
+</style>
+</head>
+
+<body>
+
+<div class="sidebar">
+    <h2>PRONOTE</h2>
+    <a href="#">Accueil</a>
+    <a href="#">Élèves</a>
+    <a href="#">Notes</a>
+    <a href="#">Absences</a>
+    <a href="#">Paramètres</a>
+</div>
+
+<div class="header">
+    <h1>Administration</h1>
+</div>
+
+<div class="content">
+    <div class="card">
+        <h3>Informations</h3>
+        <p>Bienvenue sur le tableau de bord.</p>
+    </div>
+
+    <div class="card">
+        <h3>Actions rapides</h3>
+        <button>Contacter le référent hébergement</button>
+        <button>Modifier données</button>
+    </div>
+
+    <div class="card">
+        <h3>Formulaire</h3>
+        <input type="text" placeholder="Nom"><br><br>
+        <button>Valider</button>
+    </div>
+</div>
+
+</body>
+</html>
