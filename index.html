@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Console d'hébergement PRONOTE</title>
+<title>Administrer le serveur v.2</title>
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -34,12 +34,6 @@ body {
   flex-direction: column;
   min-height: 100vh;
 }
-
-/* ── LOGO BAR ── */
-.logo-bar { background: white; border-bottom: 1px solid #ccc; padding: 10px 24px; display: flex; align-items: center; gap: 12px; }
-.pronote-logo { display: flex; align-items: center; gap: 8px; text-decoration: none; }
-.butterfly { width: 38px; height: 38px; }
-.pronote-wordmark { font-size: 26px; font-weight: 900; color: var(--green-dark); letter-spacing: -0.03em; font-style: italic; }
 
 /* ── HEADER ── */
 .header { background: var(--green-dark); padding: 10px 24px; display: flex; align-items: center; gap: 12px; }
@@ -197,28 +191,11 @@ body {
 </head>
 <body>
 
-<!-- LOGO BAR -->
-<div class="logo-bar">
-  <div class="pronote-logo">
-    <svg class="butterfly" viewBox="0 0 80 60" xmlns="http://www.w3.org/2000/svg">
-      <ellipse cx="20" cy="18" rx="18" ry="14" fill="#f9c12e" opacity="0.9"/>
-      <ellipse cx="18" cy="38" rx="14" ry="10" fill="#f9c12e" opacity="0.75"/>
-      <ellipse cx="60" cy="18" rx="18" ry="14" fill="#f9c12e" opacity="0.9"/>
-      <ellipse cx="62" cy="38" rx="14" ry="10" fill="#f9c12e" opacity="0.75"/>
-      <ellipse cx="40" cy="28" rx="5" ry="18" fill="#2d6a3f"/>
-      <circle cx="40" cy="12" r="4" fill="#1a4a2a"/>
-      <line x1="38" y1="10" x2="28" y2="4" stroke="#1a4a2a" stroke-width="1.5" stroke-linecap="round"/>
-      <line x1="42" y1="10" x2="52" y2="4" stroke="#1a4a2a" stroke-width="1.5" stroke-linecap="round"/>
-    </svg>
-    <span class="pronote-wordmark">PRONOTE</span>
-  </div>
-</div>
-
 <!-- HEADER -->
 <div class="header">
   <div class="header-status">✓</div>
   <div class="header-title-block">
-    <div class="header-title">Console d'hébergement PRONOTE</div>
+    <div class="header-title">Administrer le serveur v.2</div>
     <div class="header-subtitle" id="header-subtitle">Chargement…</div>
   </div>
   <div class="header-right">
@@ -276,7 +253,7 @@ body {
         <button class="action-btn primary">⏻ Publier la base</button>
         <div class="status-tag"><span class="dot red"></span> Non publiée</div>
         <div class="action-sep"></div>
-        <span style="font-size:13px;color:#666">Base : <strong>Base année 2025-2026.not</strong></span>
+        <span style="font-size:13px;color:#666">Base : <strong>-</strong></span>
         <div style="flex:1"></div>
         <button class="action-btn lock" id="unlock-btn">
           <span id="lock-icon">🔒</span> <span id="unlock-label">Accès protégé</span>
@@ -284,7 +261,7 @@ body {
       </div>
       <div class="page-inner">
         <div id="error-banner"></div>
-        <div class="page-heading">Administration de PRONOTE.net — <span id="page-estab">…</span></div>
+        <div class="page-heading">Administrer le serveur — <span id="page-estab">…</span></div>
         <div class="status-row" id="status-row"></div>
 
         <!-- Messages académie -->
@@ -764,7 +741,7 @@ const CONFIG = {
     "academy": "Académie de Créteil",
     "uai": "0930118A",
     "pronote_version": "MAJ prochaine vers 2026.0.1",
-    "edt_version": "",
+    "edt_version": "2026.0.1",
     "url": "https://pronote.oxoomy.fr/",
     "url_parent": "https://pronote.oxoomy.fr/parent.html",
     "url_student": "https://pronote.oxoomy.fr/eleve.html",
@@ -782,26 +759,26 @@ const CONFIG = {
     "cpu": "AMD Ryzen 5",
     "ram_gb": 8,
     "disk_total_gb": 128,
-    "disk_used_gb": null,
+    "disk_used_gb": 107,
     "backup_schedule": "Toutes les heures",
     "backup_location": "Serveur"
   },
   "ssl": {
     "issuer": "Let's Encrypt",
     "domain": "pronote.oxoomy.fr",
-    "valid_from": "",
-    "valid_until": "",
+    "valid_from": "2026-06-03",
+    "valid_until": "2026-09-01",
     "auto_renew": true
   },
   "contacts": {
     "referent_name": "M. KANOUNI Farouk",
-    "referent_role": "Administrateur PRONOTE",
+    "referent_role": "Chef d'établissement",
     "referent_email": "farouk.kanouni@pedagogie.groupe-citadelle.fr",
-    "referent_phone": "",
+    "referent_phone": "null",
     "support_index": "https://support.index-education.com",
     "support_phone": "03 26 25 00 00",
-    "contract_number": "",
-    "contract_expiry": ""
+    "contract_number": "null",
+    "contract_expiry": "null"
   },
   "protected": {
     "password_hash": "8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92",
