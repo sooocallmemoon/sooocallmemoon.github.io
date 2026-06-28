@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Administrer le serveur v.2</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --green-dark: #2d5a1b;
+  --green-mid: #3d7a24;
+  --green-light: #4e9a30;
+  --green-bright: #6ab840;
+  --green-tab: #5aab32;
+  --green-hover: #a8d878;
+  --sidebar-w: 52px;
+  --header-h: 38px;
+  --tab-h: 30px;
+  --text: #1a1a1a;
+  --text-light: #ffffff;
+  --border: #b8d4a0;
+  --border-table: #d0d0d0;
+  --row-alt: #f2f8ee;
+  --row-hover: #e4f2d8;
+  --link: #1a5fa8;
+  --link-hover: #0d3d7a;
+  --section-bg: #e8f4de;
+  --section-border: #8cb86a;
+  --orange: #e07820;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
+  font-size: 12px;
+  background: #d8e8c8;
+  color: var(--text);
+  display: flex;
+  min-height: 100vh;
+}
+
+/* ── SIDEBAR ── */
+.sidebar {
+  width: var(--sidebar-w);
+  background: var(--green-dark);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 6px;
+  gap: 2px;
+  position: fixed;
+  top: 0; left: 0; bottom: 0;
+  z-index: 100;
+}
+
+.sidebar-logo {
+  color: white;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-align: center;
+  padding: 4px 2px 6px;
+  border-bottom: 1px solid rgba(255,255,255,0.2);
+  width: 100%;
+  margin-bottom: 4px;
+}
+
+.sidebar-logo span { display: block; font-size: 14px; font-weight: 900; color: #fff; letter-spacing: -0.02em; }
+
+.nav-item {
+  width: 44px;
+  height: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  border-radius: 4px;
+  cursor: pointer;
+  text-decoration: none;
+  color: rgba(255,255,255,0.75);
+  transition: background 0.15s;
+  padding: 2px;
+}
+
+.nav-item:hover, .nav-item.active {
+  background: rgba(255,255,255,0.15);
+  color: white;
+}
+
+.nav-item svg { width: 18px; height: 18px; flex-shrink: 0; }
+.nav-item span { font-size: 8px; text-align: center; line-height: 1.1; }
+
+.nav-sep {
+  width: 36px;
+  height: 1px;
+  background: rgba(255,255,255,0.15);
+  margin: 2px 0;
+}
+
+/* ── MAIN ── */
+.main {
+  margin-left: var(--sidebar-w);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* ── HEADER ── */
+.header {
+  background: linear-gradient(180deg, var(--green-light) 0%, var(--green-mid) 100%);
+  height: var(--header-h);
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+  gap: 8px;
+  border-bottom: 2px solid var(--green-dark);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+
+.header-logo {
+  font-size: 15px;
+  font-weight: 900;
+  color: white;
+  letter-spacing: -0.03em;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.header-logo-badge {
+  background: white;
+  color: var(--green-dark);
+  font-size: 8px;
+  font-weight: 800;
+  padding: 1px 5px;
+  border-radius: 2px;
+  letter-spacing: 0.05em;
+}
+
+.header-title {
+  color: white;
+  font-size: 11px;
+  font-weight: 600;
+  margin-left: 6px;
+  opacity: 0.9;
+  border-left: 1px solid rgba(255,255,255,0.3);
+  padding-left: 8px;
+}
+
+.header-right {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.header-btn {
+  background: rgba(255,255,255,0.2);
+  border: 1px solid rgba(255,255,255,0.35);
+  color: white;
+  font-size: 10px;
+  padding: 3px 8px;
+  border-radius: 3px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  transition: background 0.12s;
+}
+.header-btn:hover { background: rgba(255,255,255,0.35); }
+.header-btn.locked { background: rgba(255,160,0,0.35); border-color: rgba(255,200,0,0.5); }
+.header-btn.unlocked { background: rgba(100,220,80,0.3); border-color: rgba(150,255,100,0.5); }
+
+/* ── TABS ── */
+.tabs {
+  background: var(--green-dark);
+  display: flex;
+  align-items: flex-end;
+  padding: 0 8px;
+  gap: 2px;
+  height: var(--tab-h);
+  border-bottom: 1px solid var(--green-dark);
+}
+
+.tab {
+  height: 24px;
+  padding: 0 12px;
+  font-size: 11px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.7);
+  border-radius: 4px 4px 0 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-bottom: none;
+  transition: all 0.12s;
+  text-decoration: none;
+}
+
+.tab:hover { background: rgba(255,255,255,0.2); color: white; }
+.tab.active {
+  background: #f0f4ec;
+  color: var(--green-dark);
+  font-weight: 700;
+  border-color: var(--border);
+}
+
+.tab svg { width: 12px; height: 12px; }
+
+/* ── BREADCRUMB ── */
+.breadcrumb {
+  background: #eaf3e2;
+  border-bottom: 1px solid var(--border);
+  padding: 4px 12px;
+  font-size: 10px;
+  color: #555;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.breadcrumb a { color: var(--link); text-decoration: none; }
+.breadcrumb a:hover { text-decoration: underline; }
+
+/* ── CONTENT ── */
+.content {
+  flex: 1;
+  padding: 10px 12px;
+  background: #f0f4ec;
+}
+
+.page-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--green-dark);
+  margin-bottom: 10px;
+  padding-bottom: 6px;
+  border-bottom: 2px solid var(--green-light);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.page-title svg { width: 16px; height: 16px; color: var(--green-mid); }
+
+/* ── STATUS BAR ── */
+.status-bar {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+}
+
+.status-chip {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: white;
+  border: 1px solid var(--border-table);
+  border-radius: 3px;
+  padding: 4px 10px;
+  font-size: 11px;
+}
+
+.dot {
+  width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0;
+}
+.dot.green { background: #4caf50; }
+.dot.orange { background: #ff9800; }
+.dot.red { background: #f44336; }
+.dot.gray { background: #9e9e9e; }
+
+/* ── SECTIONS & TABLE ── */
+.section-block {
+  background: white;
+  border: 1px solid var(--border-table);
+  border-radius: 3px;
+  margin-bottom: 8px;
+  overflow: hidden;
+}
+
+.section-head {
+  background: var(--section-bg);
+  border-bottom: 1px solid var(--section-border);
+  padding: 5px 10px;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--green-dark);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.section-head:hover { background: #dcefd0; }
+.section-head svg { width: 13px; height: 13px; flex-shrink: 0; }
+.section-arrow { margin-left: auto; transition: transform 0.2s; }
+.section-arrow.open { transform: rotate(90deg); }
+
+.info-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 11px;
+}
+
+.info-table tr:nth-child(even) { background: var(--row-alt); }
+.info-table tr:hover { background: var(--row-hover); }
+
+.info-table td {
+  padding: 5px 10px;
+  border-bottom: 1px solid #e8e8e8;
+  vertical-align: middle;
+}
+
+.info-table tr:last-child td { border-bottom: none; }
+
+.info-table .lbl {
+  width: 200px;
+  color: #444;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.info-table .val {
+  color: var(--text);
+  word-break: break-all;
+}
+
+.info-table .val a {
+  color: var(--link);
+  text-decoration: none;
+}
+.info-table .val a:hover { text-decoration: underline; color: var(--link-hover); }
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 1px 6px;
+  border-radius: 2px;
+  font-size: 10px;
+  font-weight: 700;
+}
+.badge.green { background: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
+.badge.orange { background: #fff3e0; color: #e65100; border: 1px solid #ffcc80; }
+.badge.red { background: #ffebee; color: #c62828; border: 1px solid #ef9a9a; }
+.badge.blue { background: #e3f2fd; color: #1565c0; border: 1px solid #90caf9; }
+.badge.gray { background: #f5f5f5; color: #616161; border: 1px solid #bdbdbd; }
+
+.disk-wrap { display: flex; align-items: center; gap: 8px; }
+.disk-bar-bg { width: 80px; height: 8px; background: #e0e0e0; border-radius: 2px; overflow: hidden; border: 1px solid #ccc; }
+.disk-bar-fill { height: 100%; border-radius: 2px; }
+.disk-bar-fill.ok { background: #4caf50; }
+.disk-bar-fill.warn { background: #ff9800; }
+.disk-bar-fill.danger { background: #f44336; }
+
+/* ── LOCKED SECTION ── */
+.locked-wrap {
+  position: relative;
+  overflow: hidden;
+}
+.locked-veil {
+  position: absolute;
+  inset: 0;
+  background: rgba(240,244,236,0.88);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #555;
+  z-index: 10;
+  backdrop-filter: blur(2px);
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+.locked-veil:hover { background: rgba(240,244,236,0.75); }
+.locked-veil.hidden { opacity: 0; pointer-events: none; }
+.blur-content { filter: blur(4px); user-select: none; transition: filter 0.3s; }
+.blur-content.clear { filter: none; user-select: auto; }
+
+/* ── URL CHIPS ── */
+.url-list { display: flex; flex-wrap: wrap; gap: 5px; padding: 6px 10px; background: white; }
+.url-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 10px;
+  background: var(--section-bg);
+  border: 1px solid var(--section-border);
+  border-radius: 2px;
+  color: var(--link);
+  font-size: 11px;
+  text-decoration: none;
+  transition: background 0.12s;
+}
+.url-chip:hover { background: #d0e8b8; color: var(--link-hover); }
+.url-chip svg { width: 11px; height: 11px; }
+
+/* ── MODAL ── */
+.modal-backdrop {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  z-index: 500;
+  align-items: center;
+  justify-content: center;
+}
+.modal-backdrop.open { display: flex; }
+.modal {
+  background: white;
+  border: 2px solid var(--green-mid);
+  border-radius: 4px;
+  width: 320px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  overflow: hidden;
+}
+.modal-header {
+  background: linear-gradient(180deg, var(--green-light) 0%, var(--green-mid) 100%);
+  padding: 8px 12px;
+  color: white;
+  font-size: 12px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.modal-body { padding: 14px 16px; }
+.modal-body p { font-size: 11px; color: #444; margin-bottom: 10px; }
+.modal-error { display: none; font-size: 11px; color: #c62828; margin-bottom: 8px; background: #ffebee; border: 1px solid #ef9a9a; padding: 4px 8px; border-radius: 2px; }
+.modal-body input[type=password] {
+  width: 100%;
+  border: 1px solid #bbb;
+  border-radius: 2px;
+  padding: 5px 8px;
+  font-size: 12px;
+  margin-bottom: 10px;
+  outline: none;
+}
+.modal-body input[type=password]:focus { border-color: var(--green-mid); }
+.modal-actions { display: flex; gap: 6px; justify-content: flex-end; }
+.btn { padding: 4px 14px; border-radius: 2px; font-size: 11px; cursor: pointer; border: 1px solid #ccc; background: #f5f5f5; color: #333; }
+.btn:hover { background: #e8e8e8; }
+.btn.primary { background: var(--green-mid); border-color: var(--green-dark); color: white; font-weight: 700; }
+.btn.primary:hover { background: var(--green-dark); }
+
+/* ── FOOTER ── */
+.footer {
+  background: var(--green-dark);
+  color: rgba(255,255,255,0.6);
+  font-size: 9px;
+  padding: 4px 12px;
+  display: flex;
+  justify-content: space-between;
+}
+
+/* ── ERROR BANNER ── */
+#error-banner {
+  display: none;
+  background: #ffebee;
+  border: 1px solid #ef9a9a;
+  color: #c62828;
+  padding: 8px 12px;
+  font-size: 11px;
+  border-radius: 3px;
+  margin-bottom: 8px;
+}
+</style>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<nav class="sidebar">
+  <div class="sidebar-logo">
+    <span>P</span>RONOTE
+  </div>
+
+  <a class="nav-item active" href="#" title="Accueil">
+    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 9.75L12 3l9 6.75V21a1 1 0 01-1 1H4a1 1 0 01-1-1V9.75z"/><path d="M9 22V12h6v10"/></svg>
+    <span>Accueil</span>
+  </a>
+
+  <div class="nav-sep"></div>
+
+  <a class="nav-item" href="#" title="Serveur">
+    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="4" rx="1"/><rect x="2" y="10" width="20" height="4" rx="1"/><rect x="2" y="17" width="20" height="4" rx="1"/><circle cx="18" cy="5" r="1" fill="currentColor"/><circle cx="18" cy="12" r="1" fill="currentColor"/><circle cx="18" cy="19" r="1" fill="currentColor"/></svg>
+    <span>Serveur</span>
+  </a>
+
+  <a class="nav-item" href="#" title="SSL">
+    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2L4 6v6c0 5.25 3.5 10.15 8 11.5C16.5 22.15 20 17.25 20 12V6l-8-4z"/></svg>
+    <span>SSL</span>
+  </a>
+
+  <div class="nav-sep"></div>
+
+  <a class="nav-item" href="#" title="Contacts">
+    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+    <span>Contact</span>
+  </a>
+
+  <a class="nav-item" href="#" title="Paramètres">
+    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2m-3.22-6.78l-1.42 1.42M5.64 18.36l-1.42 1.42m0-12.74l1.42 1.42m11.3 11.3l1.42 1.42"/></svg>
+    <span>Config.</span>
+  </a>
+
+  <div style="flex:1"></div>
+
+  <a class="nav-item" href="#" title="Aide" style="margin-bottom:6px">
+    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9 9a3 3 0 116 0c0 2-3 3-3 3"/><circle cx="12" cy="17" r=".5" fill="currentColor"/></svg>
+    <span>Aide</span>
+  </a>
+</nav>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-logo">
+      ALS
+      <span class="header-logo-badge">v.2</span>
+    </div>
+    <div class="header-title">Administrer le serveur v.2</div>
+    <div class="header-right">
+      <button class="header-btn" id="unlock-btn" onclick="openModal()">
+        <span id="lock-icon">🔒</span>
+        <span id="unlock-label">Accès protégé</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- TABS -->
+  <div class="tabs">
+    <a class="tab active" href="#">
+      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 9.75L12 3l9 6.75V21a1 1 0 01-1 1H4a1 1 0 01-1-1V9.75z"/></svg>
+      Administration
+    </a>
+    <a class="tab" href="#">
+      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="4" rx="1"/><rect x="2" y="10" width="20" height="4" rx="1"/></svg>
+      Serveur
+    </a>
+    <a class="tab" href="#">
+      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2L4 6v6c0 5.25 3.5 10.15 8 11.5C16.5 22.15 20 17.25 20 12V6l-8-4z"/></svg>
+      Certificat SSL
+    </a>
+    <a class="tab" href="#">
+      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+      Contact
+    </a>
+  </div>
+
+  <!-- BREADCRUMB -->
+  <div class="breadcrumb">
+    <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 9.75L12 3l9 6.75V21a1 1 0 01-1 1H4a1 1 0 01-1-1V9.75z"/></svg>
+    <a href="#">Accueil</a>
+    <span>›</span>
+    <span id="bc-estab">Chargement…</span>
+  </div>
+
+  <!-- CONTENT -->
+  <div class="content">
+    <div id="error-banner"></div>
+
+    <div class="page-title">
+      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+      Administrer le serveur v.2 — <span id="title-estab" style="color:var(--green-mid);margin-left:4px">…</span>
+    </div>
+
+    <!-- STATUS BAR -->
+    <div class="status-bar" id="status-bar"></div>
+
+<!-- MESSAGE ACADÉMIE -->
+<div class="academy-message warning">
+
+  <div class="academy-message-head">
+    Votre académie vous informe :
+  </div>
+
+  <div class="academy-message-body">
+    <strong>Désactivation du serveur PRONOTE pour l'année 2025-2026</strong><br>
+    Le serveur PRONOTE de votre établissement est désormais désactivé. En attendant la nouvelle version, hésitez pas à prévoir vos emplois du temps avec la nouvelle version EDT Monoposte 2026, accessible sur le poste de votre établissement. Les données de l'année scolaire 2026-2027 sont désormais officielles et accessibles.
+
+    <div class="academy-date">
+      Message transmis le 28/06/2026 à 15h00
+    </div>
+  </div>
+
+</div>
+
+    <!-- SECTION : Infos générales -->
+    <div class="section-block">
+      <div class="section-head" onclick="toggleSection(this)">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+        Informations générales
+        <svg class="section-arrow open" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg>
+      </div>
+      <div class="section-body">
+        <table class="info-table">
+          <tr><td class="lbl">Établissement</td><td class="val" id="g-estab">—</td></tr>
+          <tr><td class="lbl">Ville</td><td class="val" id="g-city">—</td></tr>
+          <tr><td class="lbl">Académie</td><td class="val" id="g-academy">—</td></tr>
+          <tr><td class="lbl">Code UAI</td><td class="val" id="g-uai">—</td></tr>
+          <tr><td class="lbl">Version PRONOTE</td><td class="val" id="g-version">—</td></tr>
+          <tr><td class="lbl">Date d'installation</td><td class="val" id="g-install">—</td></tr>
+          <tr><td class="lbl">Dernière mise à jour</td><td class="val" id="g-update">—</td></tr>
+          <tr><td class="lbl">Fenêtre de maintenance</td><td class="val" id="g-maint">—</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- SECTION : PRONOTE.net -->
+    <div class="section-block">
+      <div class="section-head" onclick="toggleSection(this)">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg>
+        PRONOTE.net
+        <svg class="section-arrow open" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg>
+      </div>
+      <div class="section-body">
+        <table class="info-table">
+          <tr><td class="lbl">URL principale</td><td class="val" id="g-url">—</td></tr>
+          <tr><td class="lbl">Espace Élèves</td><td class="val" id="g-url-student">—</td></tr>
+          <tr><td class="lbl">Espace Parents</td><td class="val" id="g-url-parent">—</td></tr>
+          <tr><td class="lbl">Espace Professeurs</td><td class="val" id="g-url-teacher">—</td></tr>
+          <tr><td class="lbl">Vie scolaire</td><td class="val" id="g-url-staff">—</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- SECTION : Serveur -->
+    <div class="section-block">
+      <div class="section-head" onclick="toggleSection(this)">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="4" rx="1"/><rect x="2" y="10" width="20" height="4" rx="1"/><rect x="2" y="17" width="20" height="4" rx="1"/></svg>
+        Serveur
+        <svg class="section-arrow open" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg>
+      </div>
+      <div class="section-body">
+        <table class="info-table">
+          <tr><td class="lbl">Nom d'hôte</td><td class="val" id="s-hostname">—</td></tr>
+          <tr><td class="lbl">Système d'exploitation</td><td class="val" id="s-os">—</td></tr>
+          <tr><td class="lbl">Processeur</td><td class="val" id="s-cpu">—</td></tr>
+          <tr><td class="lbl">Mémoire RAM</td><td class="val" id="s-ram">—</td></tr>
+          <tr><td class="lbl">IP interne</td><td class="val" id="s-ip-int">—</td></tr>
+          <tr><td class="lbl">IP publique</td><td class="val" id="s-ip-pub">—</td></tr>
+          <tr><td class="lbl">Disque</td><td class="val" id="s-disk">—</td></tr>
+          <tr><td class="lbl">Sauvegarde</td><td class="val" id="s-backup">—</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- SECTION : SSL -->
+    <div class="section-block">
+      <div class="section-head" onclick="toggleSection(this)">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2L4 6v6c0 5.25 3.5 10.15 8 11.5C16.5 22.15 20 17.25 20 12V6l-8-4z"/></svg>
+        Certificat SSL
+        <svg class="section-arrow open" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg>
+      </div>
+      <div class="section-body">
+        <table class="info-table">
+          <tr><td class="lbl">Domaine</td><td class="val" id="ssl-domain">—</td></tr>
+          <tr><td class="lbl">Émetteur</td><td class="val" id="ssl-issuer">—</td></tr>
+          <tr><td class="lbl">Valide depuis</td><td class="val" id="ssl-from">—</td></tr>
+          <tr><td class="lbl">Expire le</td><td class="val" id="ssl-to">—</td></tr>
+          <tr><td class="lbl">Validité restante</td><td class="val" id="ssl-days">—</td></tr>
+          <tr><td class="lbl">Renouvellement auto.</td><td class="val" id="ssl-auto">—</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- SECTION : Contact -->
+    <div class="section-block">
+      <div class="section-head" onclick="toggleSection(this)">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+        Référent & contrat
+        <svg class="section-arrow open" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg>
+      </div>
+      <div class="section-body">
+        <table class="info-table">
+          <tr><td class="lbl">Référent</td><td class="val" id="c-name">—</td></tr>
+          <tr><td class="lbl">Rôle</td><td class="val" id="c-role">—</td></tr>
+          <tr><td class="lbl">E-mail</td><td class="val" id="c-email">—</td></tr>
+          <tr><td class="lbl">Téléphone</td><td class="val" id="c-phone">—</td></tr>
+          <tr><td class="lbl">Support Index Éducation</td><td class="val" id="c-support">—</td></tr>
+          <tr><td class="lbl">Tél. support</td><td class="val" id="c-support-phone">—</td></tr>
+          <tr><td class="lbl">N° contrat</td><td class="val" id="c-contract">—</td></tr>
+          <tr><td class="lbl">Expiration contrat</td><td class="val" id="c-expiry">—</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- SECTION PROTÉGÉE -->
+    <div class="section-block">
+      <div class="section-head" style="background:#fff3e0;border-color:#ffcc80;color:#7a3e00" onclick="toggleSection(this)">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg>
+        Informations protégées
+        <svg class="section-arrow open" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg>
+      </div>
+      <div class="section-body locked-wrap" id="protected-wrap">
+        <div class="locked-veil" id="locked-veil" onclick="openModal()">
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg>
+          Section verrouillée — cliquer pour déverrouiller
+        </div>
+        <div class="blur-content" id="blur-content">
+          <table class="info-table">
+            <tr><td class="lbl">Login admin PRONOTE</td><td class="val" id="p-login">—</td></tr>
+            <tr><td class="lbl">Établissement identifié via</td><td class="val" id="p-hint">—</td></tr>
+            <tr><td class="lbl">Base de données</td><td class="val" id="p-db">—</td></tr>
+            <tr><td class="lbl">Utilisateur BDD</td><td class="val" id="p-db-user">—</td></tr>
+            <tr><td class="lbl">Serveur SMTP</td><td class="val" id="p-smtp">—</td></tr>
+            <tr><td class="lbl">Expéditeur SMTP</td><td class="val" id="p-smtp-user">—</td></tr>
+            <tr><td class="lbl">Clé API Index Éducation</td><td class="val" id="p-api">—</td></tr>
+            <tr><td class="lbl">VNC / RDP</td><td class="val" id="p-ports">—</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /content -->
+
+  <div class="footer">
+    <span>Administrer le serveur V.2</span>
+    <span id="footer-version">—</span>
+  </div>
+
+</div><!-- /main -->
+
+<!-- MODAL -->
+<div class="modal-backdrop" id="modal-backdrop">
+  <div class="modal">
+    <div class="modal-header">
+      <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg>
+      Accès protégé
+    </div>
+    <div class="modal-body">
+      <p>Entrez le mot de passe pour afficher les informations confidentielles.</p>
+      <div class="modal-error" id="modal-error">Mot de passe incorrect.</div>
+      <input type="password" id="pwd-input" placeholder="Mot de passe" onkeydown="if(event.key==='Enter')checkPwd()">
+      <div class="modal-actions">
+        <button class="btn" onclick="closeModal()">Annuler</button>
+        <button class="btn primary" onclick="checkPwd()">Déverrouiller</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+let cfg = null, unlocked = false;
+
+async function sha256(str) {
+  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
+  return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,'0')).join('');
+}
+
+const el = id => document.getElementById(id);
+const v = x => (x === null || x === undefined || x === '') ? '—' : String(x);
+
+function smartDate(s) {
+  if (!s) return '—';
+  const d = new Date(s);
+  if (isNaN(d.getTime())) return s;
+  return d.toLocaleDateString('fr-FR', {day:'2-digit', month:'long', year:'numeric'});
+}
+
+function daysUntil(s) {
+  if (!s) return null;
+  const d = new Date(s);
+  if (isNaN(d.getTime())) return null;
+  const now = new Date(); now.setHours(0,0,0,0); d.setHours(0,0,0,0);
+  return Math.round((d - now) / 86400000);
+}
+
+function badge(cls, txt) { return `<span class="badge ${cls}">${txt}</span>`; }
+function link(url, label) { return url ? `<a href="${url}" target="_blank">${label || url} ↗</a>` : '—'; }
+
+function populate(c) {
+  const g = c.general, s = c.server, ssl = c.ssl, ct = c.contacts;
+
+  el('bc-estab').textContent = g.establishment;
+  el('title-estab').textContent = g.establishment;
+  el('footer-version').textContent = `PRONOTE ${v(g.pronote_version)} — ${g.city}`;
+
+  el('g-estab').textContent = v(g.establishment);
+  el('g-city').textContent = v(g.city);
+  el('g-academy').textContent = v(g.academy);
+  el('g-uai').textContent = v(g.uai);
+  el('g-version').innerHTML = badge('blue', v(g.pronote_version));
+  el('g-install').textContent = smartDate(g.installation_date);
+  el('g-update').textContent = smartDate(g.last_update);
+  el('g-maint').textContent = v(g.maintenance_window);
+
+  el('g-url').innerHTML = link(g.url, g.url);
+  el('g-url-student').innerHTML = link(g.url_student, 'Espace Élèves');
+  el('g-url-parent').innerHTML = link(g.url_parent, 'Espace Parents');
+  el('g-url-teacher').innerHTML = link(g.url_teacher, 'Espace Professeurs');
+  el('g-url-staff').innerHTML = link(g.url_staff, 'Vie scolaire');
+
+  el('s-hostname').textContent = v(s.hostname);
+  el('s-os').textContent = v(s.os);
+  el('s-cpu').textContent = v(s.cpu);
+  el('s-ram').textContent = s.ram_gb ? s.ram_gb + ' Go' : '—';
+  el('s-ip-int').textContent = v(s.ip_internal);
+  el('s-ip-pub').textContent = v(s.ip_public);
+  el('s-backup').textContent = [s.backup_schedule, s.backup_location].filter(Boolean).join(' · ') || '—';
+
+  if (s.disk_used_gb !== null && s.disk_used_gb !== undefined && s.disk_total_gb) {
+    const pct = Math.round(s.disk_used_gb / s.disk_total_gb * 100);
+    const cls = pct >= 90 ? 'danger' : pct >= 70 ? 'warn' : 'ok';
+    el('s-disk').innerHTML = `
+      <div class="disk-wrap">
+        <div class="disk-bar-bg"><div class="disk-bar-fill ${cls}" style="width:${pct}%"></div></div>
+        <span>${s.disk_used_gb} / ${s.disk_total_gb} Go (${pct}%)</span>
+      </div>`;
+  } else {
+    el('s-disk').innerHTML = s.disk_total_gb ? `— / ${s.disk_total_gb} Go` : '—';
+  }
+
+  el('ssl-domain').textContent = v(ssl.domain);
+  el('ssl-issuer').textContent = v(ssl.issuer);
+  el('ssl-from').textContent = smartDate(ssl.valid_from);
+  el('ssl-to').textContent = smartDate(ssl.valid_until);
+  el('ssl-auto').innerHTML = ssl.auto_renew ? badge('green','✓ Activé') : badge('red','✗ Désactivé');
+
+  const days = daysUntil(ssl.valid_until);
+  if (days === null) el('ssl-days').innerHTML = badge('gray', 'En attente');
+  else if (days < 0) el('ssl-days').innerHTML = badge('red', '⚠ Expiré');
+  else if (days < 14) el('ssl-days').innerHTML = badge('red', `⚠ ${days} jours`);
+  else if (days < 30) el('ssl-days').innerHTML = badge('orange', `⚠ ${days} jours`);
+  else el('ssl-days').innerHTML = badge('green', `✓ ${days} jours`);
+
+  el('c-name').textContent = v(ct.referent_name);
+  el('c-role').textContent = v(ct.referent_role);
+  el('c-email').innerHTML = ct.referent_email ? `<a href="mailto:${ct.referent_email}">${ct.referent_email}</a>` : '—';
+  el('c-phone').textContent = v(ct.referent_phone);
+  el('c-support').innerHTML = link(ct.support_index, 'support.index-education.com');
+  el('c-support-phone').textContent = v(ct.support_phone);
+  el('c-contract').textContent = v(ct.contract_number);
+  el('c-expiry').textContent = smartDate(ct.contract_expiry);
+
+  // Status bar
+  const sslOk = days === null ? 'gray' : days > 30 ? 'green' : days > 0 ? 'orange' : 'red';
+  el('status-bar').innerHTML = `
+    <div class="status-chip"><span class="dot ${g.url ? 'red' : 'gray'}"></span> Serveur PRONOTE</div>
+    <div class="status-chip"><span class="dot ${sslOk}"></span> Certificat SSL</div>
+    <div class="status-chip"><span class="dot ${ssl.auto_renew ? 'green' : 'orange'}"></span> Renouvellement auto.</div>
+    <div class="status-chip"><span class="dot ${s.backup_schedule ? 'red' : 'gray'}"></span> Sauvegarde</div>`;
+}
+
+function populateProtected(p) {
+  el('p-login').textContent = v(p.admin_login);
+  el('p-hint').textContent = v(p.admin_password_hint);
+  el('p-db').textContent = p.db_host ? `${p.db_host}:${p.db_port} / ${p.db_name}` : '—';
+  el('p-db-user').textContent = v(p.db_user);
+  el('p-smtp').textContent = p.smtp_host ? `${p.smtp_host}:${p.smtp_port}` : '—';
+  el('p-smtp-user').textContent = v(p.smtp_user);
+  el('p-api').textContent = v(p.api_key_index);
+  el('p-ports').textContent = `VNC :${p.vnc_port} · RDP :${p.rdp_port}`;
+}
+
+function toggleSection(head) {
+  const body = head.nextElementSibling;
+  const arrow = head.querySelector('.section-arrow');
+  const open = body.style.display !== 'none';
+  body.style.display = open ? 'none' : '';
+  arrow.classList.toggle('open', !open);
+}
+
+function openModal() {
+  el('modal-backdrop').classList.add('open');
+  setTimeout(() => el('pwd-input').focus(), 50);
+}
+function closeModal() {
+  el('modal-backdrop').classList.remove('open');
+  el('pwd-input').value = '';
+  el('modal-error').style.display = 'none';
+}
+async function checkPwd() {
+  const hash = await sha256(el('pwd-input').value);
+  if (hash === cfg.protected.password_hash) {
+    unlocked = true;
+    populateProtected(cfg.protected);
+    el('locked-veil').classList.add('hidden');
+    el('blur-content').classList.add('clear');
+    el('unlock-btn').classList.add('unlocked');
+    el('lock-icon').textContent = '🔓';
+    el('unlock-label').textContent = 'Verrouiller';
+    closeModal();
+  } else {
+    el('modal-error').style.display = 'block';
+    el('pwd-input').select();
+  }
+}
+
+el('unlock-btn').addEventListener('click', function() {
+  if (unlocked) {
+    unlocked = false;
+    el('locked-veil').classList.remove('hidden');
+    el('blur-content').classList.remove('clear');
+    el('unlock-btn').classList.remove('unlocked');
+    el('lock-icon').textContent = '🔒';
+    el('unlock-label').textContent = 'Accès protégé';
+    ['p-login','p-hint','p-db','p-db-user','p-smtp','p-smtp-user','p-api','p-ports']
+      .forEach(id => el(id).textContent = '—');
+  } else { openModal(); }
+});
+
+el('modal-backdrop').addEventListener('click', e => { if (e.target === el('modal-backdrop')) closeModal(); });
+
+async function loadConfig() {
+  try {
+    const r = await fetch('config.json');
+    if (!r.ok) throw new Error('HTTP ' + r.status);
+    cfg = await r.json();
+    populate(cfg);
+  } catch(e) {
+    const b = el('error-banner');
+    b.style.display = 'block';
+    b.textContent = `Impossible de charger config.json : ${e.message}. Lancez le fichier via un serveur local (python -m http.server ou Live Server).`;
+  }
+}
+
+loadConfig();
+</script>
+</body>
+</html>

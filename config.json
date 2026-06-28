@@ -1,0 +1,61 @@
+{
+  "general": {
+    "establishment": "LYCEE POLYVALENT F. MITTERRAND",
+    "city": "AUBERVILLIERS",
+    "academy": "Académie de Créteil",
+    "uai": "0930118A",
+    "pronote_version": "MAJ prochaine vers 2026.0.1",
+    "url": "https://pronote.oxoomy.fr/",
+    "url_parent": "https://pronote.oxoomy.fr/parent.html",
+    "url_student": "https://pronote.oxoomy.fr/eleve.html",
+    "url_teacher": "https://pronote.oxoomy.fr/professeur.html",
+    "url_staff": "https://pronote.oxoomy.fr/viescolaire.html",
+    "installation_date": "",
+    "last_update": "",
+    "maintenance_window": "du 14/06 au 07/07"
+  },
+  "server": {
+    "hostname": "srv-pronote-01",
+    "ip_internal": "192.168.1.26",
+    "ip_public": "",
+    "os": "Windows 11",
+    "cpu": "AMD Ryzen 5",
+    "ram_gb": 8,
+    "disk_total_gb": 128,
+    "disk_used_gb": 107,
+    "backup_schedule": "Toutes les heures",
+    "backup_location": "Serveur"
+  },
+  "ssl": {
+    "issuer": "Let's Encrypt",
+    "domain": "pronote.oxoomy.fr",
+    "valid_from": "2026-06-03",
+    "valid_until": "2026-09-01",
+    "auto_renew": true
+  },
+  "contacts": {
+    "referent_name": "M. KANOUNI Farouk",
+    "referent_role": "Administrateur PRONOTE",
+    "referent_email": "farouk.kanouni@pedagogie.groupe-citadelle.fr",
+    "referent_phone": "06 06 06 06 06",
+    "support_index": "https://index-education.com",
+    "support_phone": "03 26 25 00 00",
+    "contract_number": "non mentionné",
+    "contract_expiry": "en attente de renouvellement"
+  },
+  "protected": {
+    "password_hash": "ffaa2f5c760a109a8d023167c4a28319a4a81069c0e3d50b5b557d8f9d0b20f6",
+    "admin_login": "",
+    "admin_password_hint": "UAI",
+    "db_host": "127.0.0.1",
+    "db_port": 80,
+    "db_name": "Année 2026-2027",
+    "db_user": "fkanouni",
+    "smtp_host": "smtp.gmail.com",
+    "smtp_port": 587,
+    "smtp_user": "ce.0930118A@pedagogie-groupe-citadelle.fr",
+    "api_key_index": "idx_live_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+    "vnc_port": 5900,
+    "rdp_port": 3389
+  }
+}
