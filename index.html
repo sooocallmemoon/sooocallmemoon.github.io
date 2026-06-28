@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Administrer le serveur v.2</title>
+<title>Console d'hébergement PRONOTE</title>
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -35,6 +35,11 @@ body {
   min-height: 100vh;
 }
 
+/* ── LOGO BAR ── */
+.logo-bar { background: white; border-bottom: 1px solid #ccc; padding: 10px 24px; display: flex; align-items: center; gap: 12px; }
+.pronote-logo { display: flex; align-items: center; gap: 8px; text-decoration: none; }
+.butterfly { width: 38px; height: 38px; }
+.pronote-wordmark { font-size: 26px; font-weight: 900; color: var(--green-dark); letter-spacing: -0.03em; font-style: italic; }
 
 /* ── HEADER ── */
 .header { background: var(--green-dark); padding: 10px 24px; display: flex; align-items: center; gap: 12px; }
@@ -55,7 +60,7 @@ body {
 .body-wrap { display: flex; flex: 1; }
 
 /* ── SIDEBAR ── */
-.sidebar { width: var(--sidebar-w); background: var(--sidebar-bg); display: flex; flex-direction: column; padding: 12px 0; gap: 2px; }
+.sidebar { width: var(--sidebar-w); background: var(--sidebar-bg); display: flex; flex-direction: column; padding: 12px 0; gap: 2px; min-height: calc(100vh - 102px); }
 .nav-item { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px; padding: 12px 8px; cursor: pointer; text-decoration: none; color: rgba(255,255,255,0.8); transition: background 0.15s; border-left: 3px solid transparent; }
 .nav-item:hover { background: rgba(255,255,255,0.1); color: white; }
 .nav-item.active { background: rgba(255,255,255,0.15); color: white; border-left-color: #6dcf9a; }
@@ -183,10 +188,31 @@ body {
 
 /* ── ERROR BANNER ── */
 #error-banner { display: none; background: #ffebee; border: 1px solid #ef9a9a; color: #c62828; padding: 10px 16px; font-size: 13px; border-radius: var(--radius); margin-bottom: 14px; }
+
+/* ── FOOTER ── */
+.footer { background: var(--green-dark); color: rgba(255,255,255,0.65); font-size: 12px; padding: 10px 24px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+.footer a { color: rgba(255,255,255,0.7); text-decoration: none; }
+.footer a:hover { color: white; }
 </style>
 </head>
 <body>
 
+<!-- LOGO BAR -->
+<div class="logo-bar">
+  <div class="pronote-logo">
+    <svg class="butterfly" viewBox="0 0 80 60" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="20" cy="18" rx="18" ry="14" fill="#f9c12e" opacity="0.9"/>
+      <ellipse cx="18" cy="38" rx="14" ry="10" fill="#f9c12e" opacity="0.75"/>
+      <ellipse cx="60" cy="18" rx="18" ry="14" fill="#f9c12e" opacity="0.9"/>
+      <ellipse cx="62" cy="38" rx="14" ry="10" fill="#f9c12e" opacity="0.75"/>
+      <ellipse cx="40" cy="28" rx="5" ry="18" fill="#2d6a3f"/>
+      <circle cx="40" cy="12" r="4" fill="#1a4a2a"/>
+      <line x1="38" y1="10" x2="28" y2="4" stroke="#1a4a2a" stroke-width="1.5" stroke-linecap="round"/>
+      <line x1="42" y1="10" x2="52" y2="4" stroke="#1a4a2a" stroke-width="1.5" stroke-linecap="round"/>
+    </svg>
+    <span class="pronote-wordmark">PRONOTE</span>
+  </div>
+</div>
 
 <!-- HEADER -->
 <div class="header">
@@ -247,9 +273,10 @@ body {
     <!-- ═══ PAGE : ACCUEIL ═══ -->
     <div class="page active" id="page-admin">
       <div class="action-bar">
-        <div class="status-tag"><span class="dot red"></span>Base non publiée</div>
+        <button class="action-btn primary">⏻ Publier la base</button>
+        <div class="status-tag"><span class="dot red"></span> Non publiée</div>
         <div class="action-sep"></div>
-        <span style="font-size:13px;color:#666">Base : <strong>-</strong></span>
+        <span style="font-size:13px;color:#666">Base : <strong>Base année 2025-2026.not</strong></span>
         <div style="flex:1"></div>
         <button class="action-btn lock" id="unlock-btn">
           <span id="lock-icon">🔒</span> <span id="unlock-label">Accès protégé</span>
@@ -257,29 +284,26 @@ body {
       </div>
       <div class="page-inner">
         <div id="error-banner"></div>
-        <div class="page-heading">Administrer le serveur — <span id="page-estab">…</span></div>
+        <div class="page-heading">Administration de PRONOTE.net — <span id="page-estab">…</span></div>
         <div class="status-row" id="status-row"></div>
 
-        <!-- Messages académie -->          
-        
-        <div class="academy-message-body">
-            <strong>Nouvelle version d'Administrer le serveur</strong><br>
-            Qui dit nouvelle année scolaire, dit nouvelle version d'Administrer le serveur ! Découvrez de nouvelles fonctionnalités et de nouvelles pages, pour mieux gérer votre serveur et vos informations personnelles (version encore en beta).
-            <div class="academy-date">Message transmis le 28/06/2026 à 19h20</div>
-          </div>
-        
+        <!-- Messages académie -->
         <div class="academy-message">
           <div class="academy-message-head">ℹ️ Message de votre académie</div>
           <div class="academy-message-body">
             En attendant la nouvelle version, hésitez pas à prévoir vos EDT avec la nouvelle version EDT Monoposte 2026, accessible sur le poste de votre établissement. Vérifiez également depuis Administrer le serveur que les informations de votre établissement sont correctes.
-            <div class="academy-date">Message transmis le 28/06/2026 à 19h20</div>
+            <div class="academy-date">Message transmis le 28/06/2026 à 17h58</div>
           </div>
-          <div class="academy-message">
           <div class="academy-message-body">
-            Administrer le serveur rencontre actuellement des soucis techniques lors de l'accès aux informations de contrat. Nos équipes travaillent sur la résolution de ce problème.
-            <div class="academy-date">Message transmis le 28/06/2026 à 19h20</div>
+            <strong>Nouvelle version d'Administrer le serveur</strong><br>
+            Qui dit nouvelle année scolaire, dit nouvelle version d'Administrer le serveur ! Découvrez de nouvelles fonctionnalités et de nouvelles pages, pour mieux gérer votre serveur et vos informations personnelles (version encore en beta).
+            <div class="academy-date">Message transmis le 28/06/2026 à 16h25</div>
           </div>
-
+          <div class="academy-message-body">
+            <strong>Panne des informations protégées</strong><br>
+            Les informations nécessitant un accès par mot de passe sont temporairement inaccessibles, nous travaillons actuellement sur la résolution du problème.
+            <div class="academy-date">Message transmis le 28/06/2026 à 17h48</div>
+          </div>
         </div>
 
         <!-- Infos générales -->
@@ -302,7 +326,7 @@ body {
 
         <!-- PRONOTE.net -->
         <div class="section-block">
-          <div class="section-head" onclick="toggleSection(this)">🔗 PRONOTE.net <span class="section-arrow open">▶</span></div>
+          <div class="section-head" onclick="toggleSection(this)">🔗 Accès PRONOTE.net <span class="section-arrow open">▶</span></div>
           <div>
             <table class="info-table">
               <tr><td class="lbl">URL principale</td><td class="val" id="g-url">—</td></tr>
@@ -364,7 +388,7 @@ body {
       <div class="action-bar"><span style="font-size:14px;font-weight:700;color:var(--green-dark)">💻 Installation des clients PRONOTE</span></div>
       <div class="page-inner">
         <div class="page-heading">Clients & installation</div>
-        <div class="alert info">ℹ️ Cette page récapitule les méthodes d'installation du Client PRONOTE sur les différents postes de l'établissement.</div>
+        <div class="alert info">ℹ️ Cette page récapitule les méthodes d'installation du client PRONOTE sur les différents postes de l'établissement.</div>
         <div class="install-grid">
 
           <div class="install-card">
@@ -393,11 +417,11 @@ body {
 
           <div class="install-card">
             <div class="install-card-icon">🌐</div>
-            <h3>Accès PRONOTE.net</h3>
+            <h3>Accès navigateur (web)</h3>
             <p>Accès sans installation via navigateur — recommandé pour élèves et parents.</p>
             <ul class="step-list">
               <li><span class="step-num">1</span> Ouvrir Chrome, Firefox ou Edge</li>
-              <li><span class="step-num">2</span> Se connecter à l'adresse ci-dessous</li>
+              <li><span class="step-num">2</span> Naviguer vers l'URL correspondant à son profil</li>
               <li><span class="step-num">3</span> Se connecter avec ses identifiants PRONOTE</li>
             </ul>
             <div style="margin-top:10px;display:flex;flex-direction:column;gap:5px">
@@ -414,7 +438,7 @@ body {
             <p>L'application PRONOTE est disponible sur iOS et Android.</p>
             <ul class="step-list">
               <li><span class="step-num">1</span> Télécharger « PRONOTE » sur l'App Store ou Google Play</li>
-              <li><span class="step-num">2</span> Entrer l'URL ou le code QR de connexion (généré depuis votre espace PRONOTE.net)</li>
+              <li><span class="step-num">2</span> Entrer l'URL ou le code QR de connexion</li>
               <li><span class="step-num">3</span> Se connecter avec ses identifiants habituels</li>
             </ul>
             <div class="alert info" style="margin-top:10px;margin-bottom:0;padding:8px 12px">
@@ -427,11 +451,25 @@ body {
             <h3>Client EDT</h3>
             <p>Accès au logiciel EDT pour la gestion des emplois du temps.</p>
             <ul class="step-list">
-              <li><span class="step-num">1</span> Télécharger le Client EDT 2026 depuis Index Éducation</li>
+              <li><span class="step-num">1</span> Télécharger EDT Monoposte 2026 depuis Index Éducation</li>
               <li><span class="step-num">2</span> Installer sur le poste dédié de l'établissement</li>
               <li><span class="step-num">3</span> Version installée : <span id="client-edt-version" style="font-family:monospace;background:#f5f5f5;padding:1px 6px;border-radius:3px">—</span></li>
             </ul>
-    	    </div>
+            <div class="alert warning" style="margin-top:10px;margin-bottom:0;padding:8px 12px">
+              ⚠️ En attente de la version 2026.0.1 — utiliser EDT Monoposte 2026 en attendant.
+            </div>
+          </div>
+
+          <div class="install-card">
+            <div class="install-card-icon">🛠️</div>
+            <h3>Accès distant (VNC / RDP)</h3>
+            <p>Prise en main à distance du serveur par l'administrateur réseau.</p>
+            <ul class="step-list">
+              <li><span class="step-num">1</span> Utiliser un client VNC (ex. RealVNC, TigerVNC)</li>
+              <li><span class="step-num">2</span> Adresse IP interne : <code id="rdp-ip">—</code></li>
+              <li><span class="step-num">3</span> Ports — déverrouiller la section protégée pour voir</li>
+            </ul>
+          </div>
         </div>
 
         <div class="section-block">
@@ -478,7 +516,7 @@ body {
             </table>
           </div>
         </div>
-        <div class="alert info">ℹ️ Le renouvellement automatique est géré par Let's Encrypt.</div>
+        <div class="alert info">ℹ️ Le renouvellement automatique est géré par Certbot / Let's Encrypt. En cas d'échec, contacter l'hébergeur Oxoomy.</div>
       </div>
     </div>
 
@@ -488,7 +526,7 @@ body {
       <div class="page-inner">
         <div class="page-heading">Référent & contrat</div>
         <div class="section-block">
-          <div class="section-head" onclick="toggleSection(this)">👤 Administrateur PRONOTE <span class="section-arrow open">▶</span></div>
+          <div class="section-head" onclick="toggleSection(this)">👤 Référent PRONOTE <span class="section-arrow open">▶</span></div>
           <div>
             <table class="info-table">
               <tr><td class="lbl">Nom</td><td class="val" id="c-name">—</td></tr>
@@ -513,6 +551,12 @@ body {
 
   </div><!-- /main-content -->
 </div><!-- /body-wrap -->
+
+<!-- FOOTER -->
+<div class="footer">
+  <span>📚 Console d'hébergement PRONOTE — <a href="mailto:hello@oxoomy.fr">hello@oxoomy.fr</a></span>
+  <span id="footer-version">—</span>
+</div>
 
 <!-- MODAL -->
 <div class="modal-backdrop" id="modal-backdrop">
@@ -561,13 +605,14 @@ function populate(c) {
 
   el('header-subtitle').textContent = g.establishment + ' — ' + g.city;
   el('page-estab').textContent = g.establishment;
+  el('footer-version').textContent = `PRONOTE ${v(g.pronote_version)} — ${g.city}`;
 
   // Général
   el('g-estab').textContent   = v(g.establishment);
   el('g-city').textContent    = v(g.city);
   el('g-academy').textContent = v(g.academy);
   el('g-uai').textContent     = v(g.uai);
-  el('g-version').innerHTML   = bdg('green', v(g.pronote_version));
+  el('g-version').innerHTML   = bdg('blue', v(g.pronote_version));
   el('g-version-edt').innerHTML = g.edt_version ? bdg('blue', v(g.edt_version)) : bdg('gray','Non renseigné');
   el('g-install').textContent = smartDate(g.installation_date);
   el('g-update').textContent  = smartDate(g.last_update);
@@ -623,7 +668,7 @@ function populate(c) {
   el('web-url-teacher').textContent = g.url_teacher || '—';
   el('web-url-teacher').href        = g.url_teacher || '#';
   el('mobile-url').textContent      = g.url || '—';
-  if(el('rdp-ip')) el('rdp-ip').textContent = s.ip_internal || '—';
+  el('rdp-ip').textContent          = s.ip_internal || '—';
   el('client-edt-version').textContent = g.edt_version || 'Non renseignée';
 
   // Status row
@@ -706,6 +751,12 @@ el('unlock-btn').addEventListener('click', function() {
 
 el('modal-backdrop').addEventListener('click', e => { if (e.target === el('modal-backdrop')) closeModal(); });
 
+// ─────────────────────────────────────────────
+// CONFIGURATION — modifiez directement ici
+// Mot de passe par défaut : 123456
+// Pour changer : générez un hash SHA-256 sur
+// https://emn178.github.io/online-tools/sha256/
+// ─────────────────────────────────────────────
 const CONFIG = {
   "general": {
     "establishment": "LYCEE POLYVALENT F. MITTERRAND",
@@ -713,7 +764,7 @@ const CONFIG = {
     "academy": "Académie de Créteil",
     "uai": "0930118A",
     "pronote_version": "MAJ prochaine vers 2026.0.1",
-    "edt_version": "2026.0.1",
+    "edt_version": "",
     "url": "https://pronote.oxoomy.fr/",
     "url_parent": "https://pronote.oxoomy.fr/parent.html",
     "url_student": "https://pronote.oxoomy.fr/eleve.html",
@@ -731,20 +782,20 @@ const CONFIG = {
     "cpu": "AMD Ryzen 5",
     "ram_gb": 8,
     "disk_total_gb": 128,
-    "disk_used_gb": 107,
+    "disk_used_gb": null,
     "backup_schedule": "Toutes les heures",
     "backup_location": "Serveur"
   },
   "ssl": {
     "issuer": "Let's Encrypt",
     "domain": "pronote.oxoomy.fr",
-    "valid_from": "2026-06-03",
-    "valid_until": "2026-09-01",
+    "valid_from": "",
+    "valid_until": "",
     "auto_renew": true
   },
   "contacts": {
     "referent_name": "M. KANOUNI Farouk",
-    "referent_role": "Chef d'établissement",
+    "referent_role": "Administrateur PRONOTE",
     "referent_email": "farouk.kanouni@pedagogie.groupe-citadelle.fr",
     "referent_phone": "",
     "support_index": "https://support.index-education.com",
