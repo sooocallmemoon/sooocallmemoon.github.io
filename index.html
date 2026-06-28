@@ -195,6 +195,13 @@ body {
     <div class="header-title">Console d'hébergement PRONOTE</div>
     <div class="header-subtitle" id="header-subtitle">Chargement…</div>
   </div>
+  <div class="header-right">
+    <span class="header-link">Mon compte</span>
+    <span class="header-link">Déconnexion</span>
+    <div class="header-icons">
+      <button class="hdr-icon">👤</button>
+      <button class="hdr-icon red">⏻</button>
+    </div>
   </div>
 </div>
 
@@ -253,18 +260,26 @@ body {
         <div class="page-heading">Administrer le serveur — <span id="page-estab">…</span></div>
         <div class="status-row" id="status-row"></div>
 
-        <!-- Messages académie -->
+        <!-- Messages académie -->          
+        
+        <div class="academy-message-body">
+            <strong>Nouvelle version d'Administrer le serveur</strong><br>
+            Qui dit nouvelle année scolaire, dit nouvelle version d'Administrer le serveur ! Découvrez de nouvelles fonctionnalités et de nouvelles pages, pour mieux gérer votre serveur et vos informations personnelles (version encore en beta).
+            <div class="academy-date">Message transmis le 28/06/2026 à 19h20</div>
+          </div>
+        
         <div class="academy-message">
           <div class="academy-message-head">ℹ️ Message de votre académie</div>
           <div class="academy-message-body">
             En attendant la nouvelle version, hésitez pas à prévoir vos EDT avec la nouvelle version EDT Monoposte 2026, accessible sur le poste de votre établissement. Vérifiez également depuis Administrer le serveur que les informations de votre établissement sont correctes.
-            <div class="academy-date">Message transmis le 28/06/2026 à 17h58</div>
+            <div class="academy-date">Message transmis le 28/06/2026 à 19h20</div>
           </div>
+          <div class="academy-message">
           <div class="academy-message-body">
-            <strong>Nouvelle version d'Administrer le serveur</strong><br>
-            Qui dit nouvelle année scolaire, dit nouvelle version d'Administrer le serveur ! Découvrez de nouvelles fonctionnalités et de nouvelles pages, pour mieux gérer votre serveur et vos informations personnelles (version encore en beta).
-            <div class="academy-date">Message transmis le 28/06/2026 à 16h25</div>
+            Administrer le serveur rencontre actuellement des soucis techniques lors de l'accès aux informations de contrat. Nos équipes travaillent sur la résolution de ce problème.
+            <div class="academy-date">Message transmis le 28/06/2026 à 19h20</div>
           </div>
+
         </div>
 
         <!-- Infos générales -->
@@ -553,7 +568,7 @@ function populate(c) {
   el('g-academy').textContent = v(g.academy);
   el('g-uai').textContent     = v(g.uai);
   el('g-version').innerHTML   = bdg('green', v(g.pronote_version));
-  el('g-version-edt').innerHTML = g.edt_version ? bdg('blue', v(g.edt_version)) : bdg('gray','2026.0.1');
+  el('g-version-edt').innerHTML = g.edt_version ? bdg('blue', v(g.edt_version)) : bdg('gray','Non renseigné');
   el('g-install').textContent = smartDate(g.installation_date);
   el('g-update').textContent  = smartDate(g.last_update);
   el('g-maint').textContent   = v(g.maintenance_window);
@@ -569,10 +584,10 @@ function populate(c) {
   el('s-hostname').textContent = v(s.hostname);
   el('s-os').textContent       = v(s.os);
   el('s-cpu').textContent      = v(s.cpu);
-  el('s-ram').textContent      = s.ram_gb ? s.ram_gb + ' Go' : '8';
+  el('s-ram').textContent      = s.ram_gb ? s.ram_gb + ' Go' : '—';
   el('s-ip-int').textContent   = v(s.ip_internal);
   el('s-ip-pub').textContent   = v(s.ip_public);
-  el('s-backup').textContent   = [s.backup_schedule, s.backup_location].filter(Boolean).join(' · ') || 'Disque D:';
+  el('s-backup').textContent   = [s.backup_schedule, s.backup_location].filter(Boolean).join(' · ') || '—';
   if (s.disk_used_gb !== null && s.disk_used_gb !== undefined && s.disk_total_gb) {
     const pct = Math.round(s.disk_used_gb / s.disk_total_gb * 100);
     const cls = pct >= 90 ? 'danger' : pct >= 70 ? 'warn' : 'ok';
@@ -588,12 +603,12 @@ function populate(c) {
   el('ssl-to').textContent      = smartDate(ssl.valid_until);
   el('ssl-auto').innerHTML      = ssl.auto_renew ? bdg('green','✓ Activé') : bdg('red','✗ Désactivé');
   const days = daysUntil(ssl.valid_until);
-  el('ssl-days').innerHTML = days === null ? bdg('gray','65') : days < 0 ? bdg('red','⚠ Expiré') : days < 14 ? bdg('red',`⚠ ${days} jours`) : days < 30 ? bdg('orange',`⚠ ${days} jours`) : bdg('green',`✓ ${days} jours`);
+  el('ssl-days').innerHTML = days === null ? bdg('gray','En attente') : days < 0 ? bdg('red','⚠ Expiré') : days < 14 ? bdg('red',`⚠ ${days} jours`) : days < 30 ? bdg('orange',`⚠ ${days} jours`) : bdg('green',`✓ ${days} jours`);
 
   // Contacts
   el('c-name').textContent         = v(ct.referent_name);
   el('c-role').textContent         = v(ct.referent_role);
-  el('c-email').innerHTML          = ct.referent_email ? `<a href="mailto:${ct.referent_email}">${ct.referent_email}</a>` : 'farouk.kanouni@pedagogie.groupe-citadelle.fr';
+  el('c-email').innerHTML          = ct.referent_email ? `<a href="mailto:${ct.referent_email}">${ct.referent_email}</a>` : '—';
   el('c-phone').textContent        = v(ct.referent_phone);
   el('c-support').innerHTML        = lnk(ct.support_index, 'support.index-education.com');
   el('c-support-phone').textContent = v(ct.support_phone);
@@ -609,7 +624,7 @@ function populate(c) {
   el('web-url-teacher').href        = g.url_teacher || '#';
   el('mobile-url').textContent      = g.url || '—';
   if(el('rdp-ip')) el('rdp-ip').textContent = s.ip_internal || '—';
-  el('client-edt-version').textContent = g.edt_version || '2026.0.1';
+  el('client-edt-version').textContent = g.edt_version || 'Non renseignée';
 
   // Status row
   const sslOk = days === null ? 'gray' : days > 30 ? 'green' : days > 0 ? 'orange' : 'red';
@@ -698,7 +713,7 @@ const CONFIG = {
     "academy": "Académie de Créteil",
     "uai": "0930118A",
     "pronote_version": "MAJ prochaine vers 2026.0.1",
-    "edt_version": "",
+    "edt_version": "2026.0.1",
     "url": "https://pronote.oxoomy.fr/",
     "url_parent": "https://pronote.oxoomy.fr/parent.html",
     "url_student": "https://pronote.oxoomy.fr/eleve.html",
@@ -716,14 +731,14 @@ const CONFIG = {
     "cpu": "AMD Ryzen 5",
     "ram_gb": 8,
     "disk_total_gb": 128,
-    "disk_used_gb": null,
+    "disk_used_gb": 107,
     "backup_schedule": "Toutes les heures",
     "backup_location": "Serveur"
   },
   "ssl": {
     "issuer": "Let's Encrypt",
     "domain": "pronote.oxoomy.fr",
-    "valid_from": "2026-06-03,
+    "valid_from": "2026-06-03",
     "valid_until": "2026-09-01",
     "auto_renew": true
   },
@@ -732,7 +747,7 @@ const CONFIG = {
     "referent_role": "Chef d'établissement",
     "referent_email": "farouk.kanouni@pedagogie.groupe-citadelle.fr",
     "referent_phone": "",
-    "support_index": "https://index-education.com",
+    "support_index": "https://support.index-education.com",
     "support_phone": "03 26 25 00 00",
     "contract_number": "",
     "contract_expiry": ""
