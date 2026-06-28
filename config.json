@@ -1,7 +1,7 @@
 {
   "general": {
     "establishment": "LYCEE POLYVALENT F. MITTERRAND",
-    "city": "AUBERVILLIERS",
+    "city": "44 RUE LEOPOLD RECHOSSIERE, 93001 AUBERVILLIERS",
     "academy": "Académie de Créteil",
     "uai": "0930118A",
     "pronote_version": "MAJ prochaine vers 2026.0.1",
@@ -12,7 +12,7 @@
     "url_staff": "https://pronote.oxoomy.fr/viescolaire.html",
     "installation_date": "",
     "last_update": "",
-    "maintenance_window": "du 14/06 au 07/07"
+    "maintenance_window": "du 14/06/2026 au 07/07/2026 (fin d'année scolaire)"
   },
   "server": {
     "hostname": "srv-pronote-01",
@@ -24,7 +24,7 @@
     "disk_total_gb": 128,
     "disk_used_gb": 107,
     "backup_schedule": "Toutes les heures",
-    "backup_location": "Serveur"
+    "backup_location": "Disque D:"
   },
   "ssl": {
     "issuer": "Let's Encrypt",
@@ -54,7 +54,7 @@
     "smtp_host": "smtp.gmail.com",
     "smtp_port": 587,
     "smtp_user": "ce.0930118A@pedagogie-groupe-citadelle.fr",
-    "api_key_index": "idx_live_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+    "api_key_index": "null",
     "vnc_port": 5900,
     "rdp_port": 3389
   }
