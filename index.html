@@ -8,735 +8,521 @@
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --green-dark: #2d5a1b;
-  --green-mid: #3d7a24;
-  --green-light: #4e9a30;
-  --green-bright: #6ab840;
-  --green-tab: #5aab32;
-  --green-hover: #a8d878;
-  --sidebar-w: 52px;
-  --header-h: 38px;
-  --tab-h: 30px;
-  --text: #1a1a1a;
-  --text-light: #ffffff;
-  --border: #b8d4a0;
-  --border-table: #d0d0d0;
-  --row-alt: #f2f8ee;
-  --row-hover: #e4f2d8;
-  --link: #1a5fa8;
-  --link-hover: #0d3d7a;
-  --section-bg: #e8f4de;
-  --section-border: #8cb86a;
-  --orange: #e07820;
+  --green-dark: #1a5c3a;
+  --green-mid: #2d7a52;
+  --green-light: #3d9966;
+  --green-btn: #2d8a5a;
+  --green-btn-hover: #1a6640;
+  --sidebar-bg: #1e6642;
+  --sidebar-w: 130px;
+  --text: #222;
+  --text-muted: #666;
+  --border: #d4e8dc;
+  --border-table: #ddd;
+  --row-alt: #f7fbf8;
+  --row-hover: #eef7f2;
+  --link: #1a6640;
+  --radius: 6px;
 }
 
 body {
-  font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
-  font-size: 12px;
-  background: #d8e8c8;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  font-size: 14px;
+  background: #e8f2ec;
   color: var(--text);
   display: flex;
-  min-height: 100vh;
-}
-
-/* ── SIDEBAR ── */
-.sidebar {
-  width: var(--sidebar-w);
-  background: var(--green-dark);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-top: 6px;
-  gap: 2px;
-  position: fixed;
-  top: 0; left: 0; bottom: 0;
-  z-index: 100;
-}
-
-.sidebar-logo {
-  color: white;
-  font-size: 9px;
-  font-weight: 700;
-  letter-spacing: 0.03em;
-  text-align: center;
-  padding: 4px 2px 6px;
-  border-bottom: 1px solid rgba(255,255,255,0.2);
-  width: 100%;
-  margin-bottom: 4px;
-}
-
-.sidebar-logo span { display: block; font-size: 14px; font-weight: 900; color: #fff; letter-spacing: -0.02em; }
-
-.nav-item {
-  width: 44px;
-  height: 40px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 2px;
-  border-radius: 4px;
-  cursor: pointer;
-  text-decoration: none;
-  color: rgba(255,255,255,0.75);
-  transition: background 0.15s;
-  padding: 2px;
-}
-
-.nav-item:hover, .nav-item.active {
-  background: rgba(255,255,255,0.15);
-  color: white;
-}
-
-.nav-item svg { width: 18px; height: 18px; flex-shrink: 0; }
-.nav-item span { font-size: 8px; text-align: center; line-height: 1.1; }
-
-.nav-sep {
-  width: 36px;
-  height: 1px;
-  background: rgba(255,255,255,0.15);
-  margin: 2px 0;
-}
-
-/* ── MAIN ── */
-.main {
-  margin-left: var(--sidebar-w);
-  flex: 1;
-  display: flex;
   flex-direction: column;
   min-height: 100vh;
 }
+
 
 /* ── HEADER ── */
-.header {
-  background: linear-gradient(180deg, var(--green-light) 0%, var(--green-mid) 100%);
-  height: var(--header-h);
-  display: flex;
-  align-items: center;
-  padding: 0 10px;
-  gap: 8px;
-  border-bottom: 2px solid var(--green-dark);
-  position: sticky;
-  top: 0;
-  z-index: 50;
-}
+.header { background: var(--green-dark); padding: 10px 24px; display: flex; align-items: center; gap: 12px; }
+.header-title-block { flex: 1; }
+.header-title { font-size: 16px; font-weight: 800; color: white; letter-spacing: 0.04em; text-transform: uppercase; }
+.header-subtitle { font-size: 12px; color: rgba(255,255,255,0.7); font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; margin-top: 1px; }
+.header-status { width: 28px; height: 28px; background: #4caf50; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 16px; font-weight: 700; }
+.header-right { margin-left: auto; display: flex; align-items: center; gap: 20px; }
+.header-link { color: rgba(255,255,255,0.85); font-size: 13px; text-decoration: none; cursor: pointer; }
+.header-link:hover { color: white; text-decoration: underline; }
+.header-icons { display: flex; align-items: center; gap: 10px; margin-left: 8px; }
+.hdr-icon { width: 34px; height: 34px; border-radius: 50%; background: rgba(255,255,255,0.15); display: flex; align-items: center; justify-content: center; cursor: pointer; color: white; font-size: 16px; border: none; transition: background 0.15s; }
+.hdr-icon:hover { background: rgba(255,255,255,0.3); }
+.hdr-icon.red { background: #c0392b; }
+.hdr-icon.red:hover { background: #a93226; }
 
-.header-logo {
-  font-size: 15px;
-  font-weight: 900;
-  color: white;
-  letter-spacing: -0.03em;
-  text-shadow: 0 1px 2px rgba(0,0,0,0.3);
-  display: flex;
-  align-items: center;
-  gap: 4px;
-}
+/* ── BODY LAYOUT ── */
+.body-wrap { display: flex; flex: 1; }
 
-.header-logo-badge {
-  background: white;
-  color: var(--green-dark);
-  font-size: 8px;
-  font-weight: 800;
-  padding: 1px 5px;
-  border-radius: 2px;
-  letter-spacing: 0.05em;
-}
+/* ── SIDEBAR ── */
+.sidebar { width: var(--sidebar-w); background: var(--sidebar-bg); display: flex; flex-direction: column; padding: 12px 0; gap: 2px; min-height: calc(100vh - 102px); }
+.nav-item { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px; padding: 12px 8px; cursor: pointer; text-decoration: none; color: rgba(255,255,255,0.8); transition: background 0.15s; border-left: 3px solid transparent; }
+.nav-item:hover { background: rgba(255,255,255,0.1); color: white; }
+.nav-item.active { background: rgba(255,255,255,0.15); color: white; border-left-color: #6dcf9a; }
+.nav-icon { width: 46px; height: 46px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; }
+.nav-icon.gray { background: #78909c; }
+.nav-icon.yellow { background: #f9a825; }
+.nav-icon.teal { background: #00897b; }
+.nav-icon.green-i { background: #388e3c; }
+.nav-icon.blue { background: #1976d2; }
+.nav-icon.purple { background: #7b1fa2; }
+.nav-icon.help { background: #546e7a; }
+.nav-label { font-size: 11px; font-weight: 600; text-align: center; line-height: 1.2; }
 
-.header-title {
-  color: white;
-  font-size: 11px;
-  font-weight: 600;
-  margin-left: 6px;
-  opacity: 0.9;
-  border-left: 1px solid rgba(255,255,255,0.3);
-  padding-left: 8px;
-}
+/* ── MAIN CONTENT ── */
+.main-content { flex: 1; display: flex; flex-direction: column; background: #f0f6f2; }
+.page { display: none; flex-direction: column; flex: 1; }
+.page.active { display: flex; }
+.page-inner { flex: 1; padding: 20px 28px; overflow-y: auto; }
+.page-heading { text-align: center; font-size: 20px; font-weight: 700; color: var(--text); margin-bottom: 18px; padding-bottom: 12px; border-bottom: 1px solid var(--border-table); }
 
-.header-right {
-  margin-left: auto;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.header-btn {
-  background: rgba(255,255,255,0.2);
-  border: 1px solid rgba(255,255,255,0.35);
-  color: white;
-  font-size: 10px;
-  padding: 3px 8px;
-  border-radius: 3px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  transition: background 0.12s;
-}
-.header-btn:hover { background: rgba(255,255,255,0.35); }
-.header-btn.locked { background: rgba(255,160,0,0.35); border-color: rgba(255,200,0,0.5); }
-.header-btn.unlocked { background: rgba(100,220,80,0.3); border-color: rgba(150,255,100,0.5); }
-
-/* ── TABS ── */
-.tabs {
-  background: var(--green-dark);
-  display: flex;
-  align-items: flex-end;
-  padding: 0 8px;
-  gap: 2px;
-  height: var(--tab-h);
-  border-bottom: 1px solid var(--green-dark);
-}
-
-.tab {
-  height: 24px;
-  padding: 0 12px;
-  font-size: 11px;
-  font-weight: 600;
-  color: rgba(255,255,255,0.7);
-  border-radius: 4px 4px 0 0;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  background: rgba(255,255,255,0.1);
-  border: 1px solid rgba(255,255,255,0.1);
-  border-bottom: none;
-  transition: all 0.12s;
-  text-decoration: none;
-}
-
-.tab:hover { background: rgba(255,255,255,0.2); color: white; }
-.tab.active {
-  background: #f0f4ec;
-  color: var(--green-dark);
-  font-weight: 700;
-  border-color: var(--border);
-}
-
-.tab svg { width: 12px; height: 12px; }
-
-/* ── BREADCRUMB ── */
-.breadcrumb {
-  background: #eaf3e2;
-  border-bottom: 1px solid var(--border);
-  padding: 4px 12px;
-  font-size: 10px;
-  color: #555;
-  display: flex;
-  align-items: center;
-  gap: 5px;
-}
-.breadcrumb a { color: var(--link); text-decoration: none; }
-.breadcrumb a:hover { text-decoration: underline; }
-
-/* ── CONTENT ── */
-.content {
-  flex: 1;
-  padding: 10px 12px;
-  background: #f0f4ec;
-}
-
-.page-title {
-  font-size: 14px;
-  font-weight: 700;
-  color: var(--green-dark);
-  margin-bottom: 10px;
-  padding-bottom: 6px;
-  border-bottom: 2px solid var(--green-light);
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.page-title svg { width: 16px; height: 16px; color: var(--green-mid); }
-
-/* ── STATUS BAR ── */
-.status-bar {
-  display: flex;
-  gap: 8px;
-  margin-bottom: 10px;
-  flex-wrap: wrap;
-}
-
-.status-chip {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  background: white;
-  border: 1px solid var(--border-table);
-  border-radius: 3px;
-  padding: 4px 10px;
-  font-size: 11px;
-}
-
-.dot {
-  width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0;
-}
-.dot.green { background: #4caf50; }
-.dot.orange { background: #ff9800; }
-.dot.red { background: #f44336; }
+/* ── ACTION BAR ── */
+.action-bar { display: flex; align-items: center; gap: 12px; background: white; border-bottom: 1px solid var(--border-table); padding: 10px 20px; flex-wrap: wrap; }
+.action-btn { display: flex; align-items: center; gap: 6px; padding: 6px 16px; border-radius: 20px; border: 1.5px solid #ccc; background: white; font-size: 13px; color: #444; cursor: pointer; transition: all 0.12s; font-weight: 500; }
+.action-btn:hover { border-color: var(--green-mid); color: var(--green-mid); }
+.action-btn.primary { background: var(--green-btn); border-color: var(--green-btn); color: white; font-weight: 600; }
+.action-btn.primary:hover { background: var(--green-btn-hover); }
+.action-btn.lock { background: white; border-color: #e07820; color: #e07820; }
+.action-btn.lock:hover { background: #fff3e0; }
+.action-btn.locked-open { background: #e8f5e9; border-color: #4caf50; color: #2e7d32; }
+.action-sep { width: 1px; height: 24px; background: #ddd; margin: 0 4px; }
+.status-tag { display: flex; align-items: center; gap: 6px; font-size: 13px; color: #888; font-style: italic; }
+.dot { width: 10px; height: 10px; border-radius: 50%; }
+.dot.red { background: #e53935; }
+.dot.green { background: #43a047; }
+.dot.orange { background: #fb8c00; }
 .dot.gray { background: #9e9e9e; }
 
-/* ── SECTIONS & TABLE ── */
-.section-block {
-  background: white;
-  border: 1px solid var(--border-table);
-  border-radius: 3px;
-  margin-bottom: 8px;
-  overflow: hidden;
-}
-
-.section-head {
-  background: var(--section-bg);
-  border-bottom: 1px solid var(--section-border);
-  padding: 5px 10px;
-  font-size: 11px;
-  font-weight: 700;
-  color: var(--green-dark);
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  cursor: pointer;
-  user-select: none;
-}
-
-.section-head:hover { background: #dcefd0; }
-.section-head svg { width: 13px; height: 13px; flex-shrink: 0; }
-.section-arrow { margin-left: auto; transition: transform 0.2s; }
+/* ── SECTION BLOCKS ── */
+.section-block { background: white; border: 1px solid var(--border-table); border-radius: var(--radius); margin-bottom: 14px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
+.section-head { background: #edf7f2; border-bottom: 1px solid #c8e6d4; padding: 10px 16px; font-size: 13px; font-weight: 700; color: var(--green-dark); display: flex; align-items: center; gap: 8px; cursor: pointer; user-select: none; }
+.section-head:hover { background: #e0f2ea; }
+.section-head.orange-head { background: #fff8e1; border-color: #ffe082; color: #7a4600; }
+.section-head.orange-head:hover { background: #fff3cd; }
+.section-arrow { margin-left: auto; font-size: 11px; color: #888; transition: transform 0.2s; }
 .section-arrow.open { transform: rotate(90deg); }
 
-.info-table {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 11px;
-}
-
+/* ── TABLE ── */
+.info-table { width: 100%; border-collapse: collapse; font-size: 14px; }
 .info-table tr:nth-child(even) { background: var(--row-alt); }
 .info-table tr:hover { background: var(--row-hover); }
-
-.info-table td {
-  padding: 5px 10px;
-  border-bottom: 1px solid #e8e8e8;
-  vertical-align: middle;
-}
-
+.info-table td { padding: 9px 16px; border-bottom: 1px solid #eee; vertical-align: middle; }
 .info-table tr:last-child td { border-bottom: none; }
+.info-table .lbl { width: 230px; color: #555; font-weight: 600; white-space: nowrap; font-size: 13px; }
+.info-table .val { color: var(--text); }
+.info-table .val a { color: var(--link); text-decoration: none; }
+.info-table .val a:hover { text-decoration: underline; }
 
-.info-table .lbl {
-  width: 200px;
-  color: #444;
-  font-weight: 600;
-  white-space: nowrap;
-}
-
-.info-table .val {
-  color: var(--text);
-  word-break: break-all;
-}
-
-.info-table .val a {
-  color: var(--link);
-  text-decoration: none;
-}
-.info-table .val a:hover { text-decoration: underline; color: var(--link-hover); }
-
-.badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 3px;
-  padding: 1px 6px;
-  border-radius: 2px;
-  font-size: 10px;
-  font-weight: 700;
-}
+/* ── BADGES ── */
+.badge { display: inline-flex; align-items: center; gap: 4px; padding: 2px 10px; border-radius: 12px; font-size: 12px; font-weight: 700; }
 .badge.green { background: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
 .badge.orange { background: #fff3e0; color: #e65100; border: 1px solid #ffcc80; }
 .badge.red { background: #ffebee; color: #c62828; border: 1px solid #ef9a9a; }
 .badge.blue { background: #e3f2fd; color: #1565c0; border: 1px solid #90caf9; }
 .badge.gray { background: #f5f5f5; color: #616161; border: 1px solid #bdbdbd; }
 
-.disk-wrap { display: flex; align-items: center; gap: 8px; }
-.disk-bar-bg { width: 80px; height: 8px; background: #e0e0e0; border-radius: 2px; overflow: hidden; border: 1px solid #ccc; }
-.disk-bar-fill { height: 100%; border-radius: 2px; }
-.disk-bar-fill.ok { background: #4caf50; }
-.disk-bar-fill.warn { background: #ff9800; }
-.disk-bar-fill.danger { background: #f44336; }
+/* ── DISK BAR ── */
+.disk-wrap { display: flex; align-items: center; gap: 10px; }
+.disk-bar-bg { width: 100px; height: 10px; background: #e0e0e0; border-radius: 5px; overflow: hidden; }
+.disk-bar-fill { height: 100%; border-radius: 5px; }
+.disk-bar-fill.ok { background: #43a047; }
+.disk-bar-fill.warn { background: #fb8c00; }
+.disk-bar-fill.danger { background: #e53935; }
 
-/* ── LOCKED SECTION ── */
-.locked-wrap {
-  position: relative;
-  overflow: hidden;
-}
-.locked-veil {
-  position: absolute;
-  inset: 0;
-  background: rgba(240,244,236,0.88);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  font-size: 11px;
-  font-weight: 600;
-  color: #555;
-  z-index: 10;
-  backdrop-filter: blur(2px);
-  cursor: pointer;
-  transition: opacity 0.2s;
-}
-.locked-veil:hover { background: rgba(240,244,236,0.75); }
+/* ── STATUS CHIPS ── */
+.status-row { display: flex; gap: 10px; margin-bottom: 16px; flex-wrap: wrap; }
+.status-chip { display: flex; align-items: center; gap: 7px; background: white; border: 1px solid var(--border-table); border-radius: 20px; padding: 5px 14px; font-size: 13px; color: #444; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+
+/* ── LOCKED ── */
+.locked-wrap { position: relative; overflow: hidden; }
+.locked-veil { position: absolute; inset: 0; background: rgba(237,247,242,0.92); display: flex; align-items: center; justify-content: center; gap: 10px; font-size: 14px; font-weight: 600; color: #666; z-index: 10; cursor: pointer; backdrop-filter: blur(2px); transition: opacity 0.2s; }
+.locked-veil:hover { background: rgba(230,244,237,0.85); }
 .locked-veil.hidden { opacity: 0; pointer-events: none; }
 .blur-content { filter: blur(4px); user-select: none; transition: filter 0.3s; }
 .blur-content.clear { filter: none; user-select: auto; }
 
-/* ── URL CHIPS ── */
-.url-list { display: flex; flex-wrap: wrap; gap: 5px; padding: 6px 10px; background: white; }
-.url-chip {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  padding: 3px 10px;
-  background: var(--section-bg);
-  border: 1px solid var(--section-border);
-  border-radius: 2px;
-  color: var(--link);
-  font-size: 11px;
-  text-decoration: none;
-  transition: background 0.12s;
-}
-.url-chip:hover { background: #d0e8b8; color: var(--link-hover); }
-.url-chip svg { width: 11px; height: 11px; }
+/* ── ACADEMY MESSAGE ── */
+.academy-message { background: white; border: 1px solid var(--border-table); border-left: 4px solid #f9a825; border-radius: var(--radius); margin-bottom: 16px; overflow: hidden; }
+.academy-message-head { background: #fff8e1; border-bottom: 1px solid #ffe082; padding: 8px 14px; font-size: 13px; font-weight: 700; color: #7a4f00; }
+.academy-message-body { padding: 10px 16px; font-size: 13px; color: #333; line-height: 1.6; border-bottom: 1px solid #f5f5f5; }
+.academy-message-body:last-child { border-bottom: none; }
+.academy-date { font-size: 11px; color: #999; margin-top: 6px; font-style: italic; }
+
+/* ── INSTALL CARDS ── */
+.install-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px; margin-bottom: 16px; }
+.install-card { background: white; border: 1px solid var(--border-table); border-radius: var(--radius); padding: 18px 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
+.install-card-icon { font-size: 28px; margin-bottom: 8px; }
+.install-card h3 { font-size: 15px; font-weight: 700; color: var(--green-dark); margin-bottom: 6px; }
+.install-card p { font-size: 13px; color: #555; line-height: 1.5; margin-bottom: 10px; }
+.step-list { list-style: none; }
+.step-list li { display: flex; align-items: flex-start; gap: 10px; font-size: 13px; color: #444; padding: 5px 0; border-bottom: 1px solid #f0f0f0; line-height: 1.4; }
+.step-list li:last-child { border-bottom: none; }
+.step-num { width: 22px; height: 22px; min-width: 22px; background: var(--green-btn); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; margin-top: 1px; }
+
+/* ── ALERT BOX ── */
+.alert { display: flex; align-items: flex-start; gap: 10px; padding: 12px 16px; border-radius: var(--radius); margin-bottom: 14px; font-size: 13px; }
+.alert.info { background: #e3f2fd; border: 1px solid #90caf9; color: #1565c0; }
+.alert.warning { background: #fff3e0; border: 1px solid #ffcc80; color: #e65100; }
+.alert.success { background: #e8f5e9; border: 1px solid #a5d6a7; color: #2e7d32; }
 
 /* ── MODAL ── */
-.modal-backdrop {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.45);
-  z-index: 500;
-  align-items: center;
-  justify-content: center;
-}
+.modal-backdrop { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.45); z-index: 500; align-items: center; justify-content: center; }
 .modal-backdrop.open { display: flex; }
-.modal {
-  background: white;
-  border: 2px solid var(--green-mid);
-  border-radius: 4px;
-  width: 320px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-  overflow: hidden;
-}
-.modal-header {
-  background: linear-gradient(180deg, var(--green-light) 0%, var(--green-mid) 100%);
-  padding: 8px 12px;
-  color: white;
-  font-size: 12px;
-  font-weight: 700;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-.modal-body { padding: 14px 16px; }
-.modal-body p { font-size: 11px; color: #444; margin-bottom: 10px; }
-.modal-error { display: none; font-size: 11px; color: #c62828; margin-bottom: 8px; background: #ffebee; border: 1px solid #ef9a9a; padding: 4px 8px; border-radius: 2px; }
-.modal-body input[type=password] {
-  width: 100%;
-  border: 1px solid #bbb;
-  border-radius: 2px;
-  padding: 5px 8px;
-  font-size: 12px;
-  margin-bottom: 10px;
-  outline: none;
-}
+.modal { background: white; border-radius: 8px; width: 380px; box-shadow: 0 8px 32px rgba(0,0,0,0.25); overflow: hidden; }
+.modal-header { background: var(--green-dark); padding: 14px 20px; color: white; font-size: 15px; font-weight: 700; display: flex; align-items: center; gap: 8px; }
+.modal-body { padding: 20px; }
+.modal-body p { font-size: 13px; color: #555; margin-bottom: 12px; }
+.modal-error { display: none; font-size: 13px; color: #c62828; background: #ffebee; border: 1px solid #ef9a9a; padding: 7px 12px; border-radius: 4px; margin-bottom: 10px; }
+.modal-body input[type=password] { width: 100%; border: 1.5px solid #ccc; border-radius: 4px; padding: 8px 12px; font-size: 14px; margin-bottom: 12px; outline: none; }
 .modal-body input[type=password]:focus { border-color: var(--green-mid); }
-.modal-actions { display: flex; gap: 6px; justify-content: flex-end; }
-.btn { padding: 4px 14px; border-radius: 2px; font-size: 11px; cursor: pointer; border: 1px solid #ccc; background: #f5f5f5; color: #333; }
-.btn:hover { background: #e8e8e8; }
-.btn.primary { background: var(--green-mid); border-color: var(--green-dark); color: white; font-weight: 700; }
-.btn.primary:hover { background: var(--green-dark); }
-
-/* ── FOOTER ── */
-.footer {
-  background: var(--green-dark);
-  color: rgba(255,255,255,0.6);
-  font-size: 9px;
-  padding: 4px 12px;
-  display: flex;
-  justify-content: space-between;
-}
+.modal-actions { display: flex; gap: 8px; justify-content: flex-end; }
+.btn { padding: 7px 18px; border-radius: 20px; font-size: 13px; cursor: pointer; border: 1.5px solid #ccc; background: white; color: #444; font-weight: 600; transition: all 0.12s; }
+.btn:hover { background: #f5f5f5; }
+.btn.primary { background: var(--green-btn); border-color: var(--green-btn); color: white; }
+.btn.primary:hover { background: var(--green-btn-hover); }
 
 /* ── ERROR BANNER ── */
-#error-banner {
-  display: none;
-  background: #ffebee;
-  border: 1px solid #ef9a9a;
-  color: #c62828;
-  padding: 8px 12px;
-  font-size: 11px;
-  border-radius: 3px;
-  margin-bottom: 8px;
-}
+#error-banner { display: none; background: #ffebee; border: 1px solid #ef9a9a; color: #c62828; padding: 10px 16px; font-size: 13px; border-radius: var(--radius); margin-bottom: 14px; }
+
+/* ── FOOTER ── */
+.footer { background: var(--green-dark); color: rgba(255,255,255,0.65); font-size: 12px; padding: 10px 24px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+.footer a { color: rgba(255,255,255,0.7); text-decoration: none; }
+.footer a:hover { color: white; }
 </style>
 </head>
 <body>
 
-<!-- SIDEBAR -->
-<nav class="sidebar">
-  <div class="sidebar-logo">
-    <span>ALS</span>V.2
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-status">✓</div>
+  <div class="header-title-block">
+    <div class="header-title">Console d'hébergement PRONOTE</div>
+    <div class="header-subtitle" id="header-subtitle">Chargement…</div>
   </div>
-
-  <a class="nav-item active" href="#" title="Accueil">
-    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 9.75L12 3l9 6.75V21a1 1 0 01-1 1H4a1 1 0 01-1-1V9.75z"/><path d="M9 22V12h6v10"/></svg>
-    <span>Accueil</span>
-  </a>
-
-  <div class="nav-sep"></div>
-
-  <a class="nav-item" href="#" title="Serveur">
-    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="4" rx="1"/><rect x="2" y="10" width="20" height="4" rx="1"/><rect x="2" y="17" width="20" height="4" rx="1"/><circle cx="18" cy="5" r="1" fill="currentColor"/><circle cx="18" cy="12" r="1" fill="currentColor"/><circle cx="18" cy="19" r="1" fill="currentColor"/></svg>
-    <span>Serveur PRONOTE</span>
-  </a>
-
-  <a class="nav-item" href="#" title="Clients PRONOTE et EDT">
-    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2L4 6v6c0 5.25 3.5 10.15 8 11.5C16.5 22.15 20 17.25 20 12V6l-8-4z"/></svg>
-    <span>Clients</span>
-  </a>
-
-  <div class="nav-sep"></div>
-
-  <a class="nav-item" href="https://pronote.oxoomy.fr/" title="PRONOTE.net">
-    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
-    <span>PRONOTE.net</span>
-  </a>
-
-  <a class="nav-item" href="#" title="Paramètres">
-    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2m-3.22-6.78l-1.42 1.42M5.64 18.36l-1.42 1.42m0-12.74l1.42 1.42m11.3 11.3l1.42 1.42"/></svg>
-    <span>Config.</span>
-  </a>
-
-  <div style="flex:1"></div>
-
-  <a class="nav-item" href="mailto:hello@oxoomy.fr" title="Aide" style="margin-bottom:6px">
-    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9 9a3 3 0 116 0c0 2-3 3-3 3"/><circle cx="12" cy="17" r=".5" fill="currentColor"/></svg>
-    <span>Aide</span>
-  </a>
-</nav>
-
-<!-- MAIN -->
-<div class="main">
-
-  <!-- HEADER -->
-  <div class="header">
-    <div class="header-logo">
-      ALS
-      <span class="header-logo-badge">v.2</span>
-    </div>
-    <div class="header-title">Administrer le serveur v.2</div>
-    <div class="header-right">
-      <button class="header-btn" id="unlock-btn" onclick="openModal()">
-        <span id="lock-icon">🔒</span>
-        <span id="unlock-label">Accès protégé</span>
-      </button>
+  <div class="header-right">
+    <span class="header-link">Mon compte</span>
+    <span class="header-link">Déconnexion</span>
+    <div class="header-icons">
+      <button class="hdr-icon">👤</button>
+      <button class="hdr-icon red">⏻</button>
     </div>
   </div>
-
-  <!-- BREADCRUMB -->
-  <div class="breadcrumb">
-    <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 9.75L12 3l9 6.75V21a1 1 0 01-1 1H4a1 1 0 01-1-1V9.75z"/></svg>
-    <a href="#">Accueil</a>
-    <span>›</span>
-    <span id="bc-estab">Chargement…</span>
-  </div>
-
-  <!-- CONTENT -->
-  <div class="content">
-    <div id="error-banner"></div>
-
-    <div class="page-title">
-      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
-      Administrer le serveur v.2 — <span id="title-estab" style="color:var(--green-mid);margin-left:4px">…</span>
-    </div>
-
-    <!-- STATUS BAR -->
-    <div class="status-bar" id="status-bar"></div>
-
-<!-- MESSAGE ACADÉMIE -->
-<div class="academy-message warning">
-
-  <div class="academy-message-head">
-    <strong> ℹ️ Message de votre académie </strong>
-  </div>
-
-  <div class="academy-message-body">
-    En attendant la nouvelle version, hésitez pas à prévoir vos EDT avec la nouvelle version EDT Monoposte 2026, accessible sur le poste de votre établissement. Vérifiez également depuis Administrer le serveur que les informations de votre établissement sont correctes.
-
-    <div class="academy-date">
-      Message transmis le 28/06/2026 à 17h58
-    </div>
-  </div>
-
-    <div class="academy-message-body">
-    <strong>Nouvelle version d'Administrer le serveur</strong><br>
-   Qui dit nouvelle année scolaire, dit nouvelle version d'Administrer le serveur ! Découvrez de nouvelles fonctionnalités et de nouvelles pages, pour mieux gérer votre serveur et vos informations personnelles (version encore en beta).
-    <div class="academy-date">
-      Message transmis le 28/06/2026 à 16h25
-    </div>
-  </div>
-
-      <div class="academy-message-body">
-    <strong>Panne des informations protégées</strong><br>
-   Les informations nécessitant un accès par mot de passe sont temporairement inaccessibles, nous travaillons actuellement sur la résolution du problème.
-    <div class="academy-date">
-      Message transmis le 28/06/2026 à 17h48
-    </div>
-  </div>
-
 </div>
 
-    <!-- SECTION : Infos générales -->
-    <div class="section-block">
-      <div class="section-head" onclick="toggleSection(this)">
-        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
-        Informations générales
-        <svg class="section-arrow open" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg>
-      </div>
-      <div class="section-body">
-        <table class="info-table">
-          <tr><td class="lbl">Établissement</td><td class="val" id="g-estab">—</td></tr>
-          <tr><td class="lbl">Adresse</td><td class="val" id="g-city">—</td></tr>
-          <tr><td class="lbl">Académie</td><td class="val" id="g-academy">—</td></tr>
-          <tr><td class="lbl">Code UAI</td><td class="val" id="g-uai">—</td></tr>
-          <tr><td class="lbl">Version PRONOTE</td><td class="val" id="g-version">—</td></tr>
-          <tr><td class="lbl">Version EDT</td><td class="val" id="g-version">—</td></tr>
-          <tr><td class="lbl">Date d'installation du serveur</td><td class="val" id="g-install">—</td></tr>
-          <tr><td class="lbl">Dernière mise à jour</td><td class="val" id="g-update">—</td></tr>
-          <tr><td class="lbl">Maintenance</td><td class="val" id="g-maint">—</td></tr>
-        </table>
-      </div>
-    </div>
+<!-- BODY -->
+<div class="body-wrap">
 
-    <!-- SECTION : PRONOTE.net -->
-    <div class="section-block">
-      <div class="section-head" onclick="toggleSection(this)">
-        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg>
-        PRONOTE.net
-        <svg class="section-arrow open" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg>
-      </div>
-      <div class="section-body">
-        <table class="info-table">
-          <tr><td class="lbl">URL principale</td><td class="val" id="g-url">—</td></tr>
-          <tr><td class="lbl">Espace Élèves</td><td class="val" id="g-url-student">—</td></tr>
-          <tr><td class="lbl">Espace Parents</td><td class="val" id="g-url-parent">—</td></tr>
-          <tr><td class="lbl">Espace Professeurs</td><td class="val" id="g-url-teacher">—</td></tr>
-          <tr><td class="lbl">Vie scolaire</td><td class="val" id="g-url-staff">—</td></tr>
-        </table>
-      </div>
-    </div>
+  <!-- SIDEBAR -->
+  <nav class="sidebar">
+    <a class="nav-item active" onclick="showPage('admin',this)" href="#">
+      <div class="nav-icon gray">🏠</div>
+      <span class="nav-label">Accueil</span>
+    </a>
+    <a class="nav-item" onclick="showPage('serveur',this)" href="#">
+      <div class="nav-icon yellow">🖥️</div>
+      <span class="nav-label">Serveur PRONOTE</span>
+    </a>
+    <a class="nav-item" onclick="showPage('clients',this)" href="#">
+      <div class="nav-icon teal">💻</div>
+      <span class="nav-label">Clients</span>
+    </a>
+    <a class="nav-item" onclick="showPage('ssl',this)" href="#">
+      <div class="nav-icon purple">🔒</div>
+      <span class="nav-label">SSL</span>
+    </a>
+    <a class="nav-item" onclick="showPage('contacts',this)" href="#">
+      <div class="nav-icon blue">👤</div>
+      <span class="nav-label">Contact</span>
+    </a>
+    <a class="nav-item" href="https://pronote.oxoomy.fr/" target="_blank">
+      <div class="nav-icon green-i">🌐</div>
+      <span class="nav-label">PRONOTE.net</span>
+    </a>
+    <div style="flex:1"></div>
+    <a class="nav-item" href="mailto:hello@oxoomy.fr" style="margin-bottom:6px">
+      <div class="nav-icon help">❓</div>
+      <span class="nav-label">Assistance</span>
+    </a>
+  </nav>
 
-    <!-- SECTION : Serveur -->
-    <div class="section-block">
-      <div class="section-head" onclick="toggleSection(this)">
-        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="4" rx="1"/><rect x="2" y="10" width="20" height="4" rx="1"/><rect x="2" y="17" width="20" height="4" rx="1"/></svg>
-        Serveur
-        <svg class="section-arrow open" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg>
-      </div>
-      <div class="section-body">
-        <table class="info-table">
-          <tr><td class="lbl">Nom d'hôte</td><td class="val" id="s-hostname">—</td></tr>
-          <tr><td class="lbl">Système d'exploitation</td><td class="val" id="s-os">—</td></tr>
-          <tr><td class="lbl">Processeur</td><td class="val" id="s-cpu">—</td></tr>
-          <tr><td class="lbl">Mémoire RAM</td><td class="val" id="s-ram">—</td></tr>
-          <tr><td class="lbl">IP interne</td><td class="val" id="s-ip-int">—</td></tr>
-          <tr><td class="lbl">IP publique</td><td class="val" id="s-ip-pub">—</td></tr>
-          <tr><td class="lbl">Disque</td><td class="val" id="s-disk">—</td></tr>
-          <tr><td class="lbl">Sauvegarde</td><td class="val" id="s-backup">—</td></tr>
-        </table>
-      </div>
-    </div>
+  <!-- PAGES -->
+  <div class="main-content">
 
-    <!-- SECTION : SSL -->
-    <div class="section-block">
-      <div class="section-head" onclick="toggleSection(this)">
-        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2L4 6v6c0 5.25 3.5 10.15 8 11.5C16.5 22.15 20 17.25 20 12V6l-8-4z"/></svg>
-        Certificat SSL
-        <svg class="section-arrow open" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg>
+    <!-- ═══ PAGE : ACCUEIL ═══ -->
+    <div class="page active" id="page-admin">
+      <div class="action-bar">
+        <div class="status-tag"><span class="dot red"></span>Base non publiée</div>
+        <div class="action-sep"></div>
+        <span style="font-size:13px;color:#666">Base : <strong>-</strong></span>
+        <div style="flex:1"></div>
+        <button class="action-btn lock" id="unlock-btn">
+          <span id="lock-icon">🔒</span> <span id="unlock-label">Accès protégé</span>
+        </button>
       </div>
-      <div class="section-body">
-        <table class="info-table">
-          <tr><td class="lbl">Domaine</td><td class="val" id="ssl-domain">—</td></tr>
-          <tr><td class="lbl">Émetteur</td><td class="val" id="ssl-issuer">—</td></tr>
-          <tr><td class="lbl">Valide depuis</td><td class="val" id="ssl-from">—</td></tr>
-          <tr><td class="lbl">Expire le</td><td class="val" id="ssl-to">—</td></tr>
-          <tr><td class="lbl">Validité restante</td><td class="val" id="ssl-days">—</td></tr>
-          <tr><td class="lbl">Renouvellement auto.</td><td class="val" id="ssl-auto">—</td></tr>
-        </table>
-      </div>
-    </div>
+      <div class="page-inner">
+        <div id="error-banner"></div>
+        <div class="page-heading">Administrer le serveur — <span id="page-estab">…</span></div>
+        <div class="status-row" id="status-row"></div>
 
-    <!-- SECTION : Contact -->
-    <div class="section-block">
-      <div class="section-head" onclick="toggleSection(this)">
-        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
-        Référent & contrat
-        <svg class="section-arrow open" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg>
-      </div>
-      <div class="section-body">
-        <table class="info-table">
-          <tr><td class="lbl">Référent</td><td class="val" id="c-name">—</td></tr>
-          <tr><td class="lbl">Rôle</td><td class="val" id="c-role">—</td></tr>
-          <tr><td class="lbl">E-mail</td><td class="val" id="c-email">—</td></tr>
-          <tr><td class="lbl">Téléphone</td><td class="val" id="c-phone">—</td></tr>
-          <tr><td class="lbl">Support Index Éducation</td><td class="val" id="c-support">—</td></tr>
-          <tr><td class="lbl">Tél. support</td><td class="val" id="c-support-phone">—</td></tr>
-        </table>
-      </div>
-    </div>
-
-  <!-- SECTION PROTÉGÉE -->
-    <div class="section-block">
-      <div class="section-head" style="background:#fff3e0;border-color:#ffcc80;color:#7a3e00" onclick="toggleSection(this)">
-        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg>
-        Informations protégées
-        <svg class="section-arrow open" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg>
-      </div>
-      <div class="section-body locked-wrap" id="protected-wrap">
-        <div class="locked-veil" id="locked-veil" onclick="openModal()">
-          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg>
-          Section verrouillée — cliquer pour déverrouiller
+        <!-- Messages académie -->
+        <div class="academy-message">
+          <div class="academy-message-head">ℹ️ Message de votre académie</div>
+          <div class="academy-message-body">
+            En attendant la nouvelle version, hésitez pas à prévoir vos EDT avec la nouvelle version EDT Monoposte 2026, accessible sur le poste de votre établissement. Vérifiez également depuis Administrer le serveur que les informations de votre établissement sont correctes.
+            <div class="academy-date">Message transmis le 28/06/2026 à 17h58</div>
+          </div>
+          <div class="academy-message-body">
+            <strong>Nouvelle version d'Administrer le serveur</strong><br>
+            Qui dit nouvelle année scolaire, dit nouvelle version d'Administrer le serveur ! Découvrez de nouvelles fonctionnalités et de nouvelles pages, pour mieux gérer votre serveur et vos informations personnelles (version encore en beta).
+            <div class="academy-date">Message transmis le 28/06/2026 à 16h25</div>
+          </div>
         </div>
-        <div class="blur-content" id="blur-content">
-          <table class="info-table">
-            <tr><td class="lbl">Login admin PRONOTE</td><td class="val" id="p-login">—</td></tr>
-            <tr><td class="lbl">Établissement identifié via</td><td class="val" id="p-hint">—</td></tr>
-            <tr><td class="lbl">Base de données</td><td class="val" id="p-db">—</td></tr>
-            <tr><td class="lbl">Utilisateur BDD</td><td class="val" id="p-db-user">—</td></tr>
-            <tr><td class="lbl">Serveur SMTP</td><td class="val" id="p-smtp">—</td></tr>
-            <tr><td class="lbl">Expéditeur SMTP</td><td class="val" id="p-smtp-user">—</td></tr>
-            <tr><td class="lbl">N° contrat</td><td class="val" id="c-contract">—</td></tr>
-            <tr><td class="lbl">Expiration contrat</td><td class="val" id="c-expiry">—</td></tr>
-          </table>
+
+        <!-- Infos générales -->
+        <div class="section-block">
+          <div class="section-head" onclick="toggleSection(this)">🏫 Informations générales <span class="section-arrow open">▶</span></div>
+          <div>
+            <table class="info-table">
+              <tr><td class="lbl">Établissement</td><td class="val" id="g-estab">—</td></tr>
+              <tr><td class="lbl">Adresse</td><td class="val" id="g-city">—</td></tr>
+              <tr><td class="lbl">Académie</td><td class="val" id="g-academy">—</td></tr>
+              <tr><td class="lbl">Code UAI</td><td class="val" id="g-uai">—</td></tr>
+              <tr><td class="lbl">Version PRONOTE</td><td class="val" id="g-version">—</td></tr>
+              <tr><td class="lbl">Version EDT</td><td class="val" id="g-version">—</td></tr>
+              <tr><td class="lbl">Date d'installation du serveur</td><td class="val" id="g-install">—</td></tr>
+              <tr><td class="lbl">Dernière mise à jour</td><td class="val" id="g-update">—</td></tr>
+              <tr><td class="lbl">Maintenance</td><td class="val" id="g-maint">—</td></tr>
+            </table>
+          </div>
+        </div>
+
+        <!-- PRONOTE.net -->
+        <div class="section-block">
+          <div class="section-head" onclick="toggleSection(this)">🔗 PRONOTE.net <span class="section-arrow open">▶</span></div>
+          <div>
+            <table class="info-table">
+              <tr><td class="lbl">URL principale</td><td class="val" id="g-url">—</td></tr>
+              <tr><td class="lbl">Espace Élèves</td><td class="val" id="g-url-student">—</td></tr>
+              <tr><td class="lbl">Espace Parents</td><td class="val" id="g-url-parent">—</td></tr>
+              <tr><td class="lbl">Espace Professeurs</td><td class="val" id="g-url-teacher">—</td></tr>
+              <tr><td class="lbl">Vie scolaire</td><td class="val" id="g-url-staff">—</td></tr>
+            </table>
+          </div>
+        </div>
+
+        <!-- Infos protégées -->
+        <div class="section-block">
+          <div class="section-head orange-head" onclick="toggleSection(this)">🔐 Informations protégées <span class="section-arrow open">▶</span></div>
+          <div class="locked-wrap">
+            <div class="locked-veil" id="locked-veil" onclick="openModal()">🔒 Section verrouillée — cliquer pour déverrouiller</div>
+            <div class="blur-content" id="blur-content">
+              <table class="info-table">
+                <tr><td class="lbl">Login admin PRONOTE</td><td class="val" id="p-login">—</td></tr>
+                <tr><td class="lbl">Établissement identifié via</td><td class="val" id="p-hint">—</td></tr>
+                <tr><td class="lbl">Base de données</td><td class="val" id="p-db">—</td></tr>
+                <tr><td class="lbl">Utilisateur BDD</td><td class="val" id="p-db-user">—</td></tr>
+                <tr><td class="lbl">Serveur SMTP</td><td class="val" id="p-smtp">—</td></tr>
+                <tr><td class="lbl">Expéditeur SMTP</td><td class="val" id="p-smtp-user">—</td></tr>
+                <tr><td class="lbl">N° contrat</td><td class="val" id="c-contract">—</td></tr>
+                <tr><td class="lbl">Expiration contrat</td><td class="val" id="c-expiry">—</td></tr>
+              </table>
+            </div>
+          </div>
         </div>
       </div>
     </div>
 
-  </div><!-- /content -->
+    <!-- ═══ PAGE : SERVEUR ═══ -->
+    <div class="page" id="page-serveur">
+      <div class="action-bar"><span style="font-size:14px;font-weight:700;color:var(--green-dark)">🖥️ Serveur PRONOTE</span></div>
+      <div class="page-inner">
+        <div class="page-heading">Informations du serveur</div>
+        <div class="section-block">
+          <div class="section-head" onclick="toggleSection(this)">⚙️ Matériel & système <span class="section-arrow open">▶</span></div>
+          <div>
+            <table class="info-table">
+              <tr><td class="lbl">Nom d'hôte</td><td class="val" id="s-hostname">—</td></tr>
+              <tr><td class="lbl">Système d'exploitation</td><td class="val" id="s-os">—</td></tr>
+              <tr><td class="lbl">Processeur</td><td class="val" id="s-cpu">—</td></tr>
+              <tr><td class="lbl">Mémoire RAM</td><td class="val" id="s-ram">—</td></tr>
+              <tr><td class="lbl">IP interne</td><td class="val" id="s-ip-int">—</td></tr>
+              <tr><td class="lbl">IP publique</td><td class="val" id="s-ip-pub">—</td></tr>
+              <tr><td class="lbl">Disque</td><td class="val" id="s-disk">—</td></tr>
+              <tr><td class="lbl">Sauvegarde</td><td class="val" id="s-backup">—</td></tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
 
-  <div class="footer">
-    <span>Administrer le serveur V.2</span>
-    <span id="footer-version">—</span>
-  </div>
+    <!-- ═══ PAGE : CLIENTS ═══ -->
+    <div class="page" id="page-clients">
+      <div class="action-bar"><span style="font-size:14px;font-weight:700;color:var(--green-dark)">💻 Installation des clients PRONOTE</span></div>
+      <div class="page-inner">
+        <div class="page-heading">Clients & installation</div>
+        <div class="alert info">ℹ️ Cette page récapitule les méthodes d'installation du Client PRONOTE sur les différents postes de l'établissement.</div>
+        <div class="install-grid">
 
-</div><!-- /main -->
+          <div class="install-card">
+            <div class="install-card-icon">🖥️</div>
+            <h3>Client Windows</h3>
+            <p>Installation du client lourd PRONOTE sur poste Windows (enseignants, administration).</p>
+            <ul class="step-list">
+              <li><span class="step-num">1</span> Télécharger le fichier d'installation depuis Index Éducation</li>
+              <li><span class="step-num">2</span> Lancer <code>SetupPRONOTE.exe</code> en administrateur</li>
+              <li><span class="step-num">3</span> Renseigner l'URL du serveur : <code id="client-url-win">—</code></li>
+              <li><span class="step-num">4</span> Valider et tester la connexion</li>
+            </ul>
+          </div>
+
+          <div class="install-card">
+            <div class="install-card-icon">🍎</div>
+            <h3>Client macOS</h3>
+            <p>Installation du client PRONOTE sur Mac (salle des professeurs, administration).</p>
+            <ul class="step-list">
+              <li><span class="step-num">1</span> Télécharger <code>PRONOTE.dmg</code> depuis Index Éducation</li>
+              <li><span class="step-num">2</span> Glisser l'application dans le dossier Applications</li>
+              <li><span class="step-num">3</span> Renseigner l'URL du serveur : <code id="client-url-mac">—</code></li>
+              <li><span class="step-num">4</span> Autoriser l'app dans Préférences Système → Sécurité</li>
+            </ul>
+          </div>
+
+          <div class="install-card">
+            <div class="install-card-icon">🌐</div>
+            <h3>Accès PRONOTE.net</h3>
+            <p>Accès sans installation via navigateur — recommandé pour élèves et parents.</p>
+            <ul class="step-list">
+              <li><span class="step-num">1</span> Ouvrir Chrome, Firefox ou Edge</li>
+              <li><span class="step-num">2</span> Se connecter à l'adresse ci-dessous</li>
+              <li><span class="step-num">3</span> Se connecter avec ses identifiants PRONOTE</li>
+            </ul>
+            <div style="margin-top:10px;display:flex;flex-direction:column;gap:5px">
+              <span style="font-size:12px;color:#888;font-weight:600;text-transform:uppercase;letter-spacing:.05em">URLs d'accès</span>
+              <a id="web-url-student" href="#" target="_blank" style="font-size:13px;color:var(--link)">— Élèves</a>
+              <a id="web-url-parent" href="#" target="_blank" style="font-size:13px;color:var(--link)">— Parents</a>
+              <a id="web-url-teacher" href="#" target="_blank" style="font-size:13px;color:var(--link)">— Professeurs</a>
+            </div>
+          </div>
+
+          <div class="install-card">
+            <div class="install-card-icon">📱</div>
+            <h3>Application mobile</h3>
+            <p>L'application PRONOTE est disponible sur iOS et Android.</p>
+            <ul class="step-list">
+              <li><span class="step-num">1</span> Télécharger « PRONOTE » sur l'App Store ou Google Play</li>
+              <li><span class="step-num">2</span> Entrer l'URL ou le code QR de connexion (généré depuis votre espace PRONOTE.net)</li>
+              <li><span class="step-num">3</span> Se connecter avec ses identifiants habituels</li>
+            </ul>
+            <div class="alert info" style="margin-top:10px;margin-bottom:0;padding:8px 12px">
+              ℹ️ URL : <strong id="mobile-url">—</strong>
+            </div>
+          </div>
+
+          <div class="install-card">
+            <div class="install-card-icon">📅</div>
+            <h3>Client EDT</h3>
+            <p>Accès au logiciel EDT pour la gestion des emplois du temps.</p>
+            <ul class="step-list">
+              <li><span class="step-num">1</span> Télécharger le Client EDT 2026 depuis Index Éducation</li>
+              <li><span class="step-num">2</span> Installer sur le poste dédié de l'établissement</li>
+              <li><span class="step-num">3</span> Version installée : <span id="client-edt-version" style="font-family:monospace;background:#f5f5f5;padding:1px 6px;border-radius:3px">—</span></li>
+            </ul>
+    	    </div>
+
+
+        <div class="section-block">
+          <div class="section-head" onclick="toggleSection(this)">📋 Prérequis système <span class="section-arrow open">▶</span></div>
+          <div>
+            <table class="info-table">
+              <tr><td class="lbl">Navigateur recommandé</td><td class="val">Chrome 90+, Firefox 88+, Edge 90+</td></tr>
+              <tr><td class="lbl">OS client Windows</td><td class="val">Windows 10 / 11 (64 bits)</td></tr>
+              <tr><td class="lbl">OS client macOS</td><td class="val">macOS 12 Monterey ou supérieur</td></tr>
+              <tr><td class="lbl">Résolution minimale</td><td class="val">1280 × 720</td></tr>
+              <tr><td class="lbl">Connexion réseau</td><td class="val">Accès à l'URL du serveur PRONOTE (réseau local ou internet)</td></tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ PAGE : SSL ═══ -->
+    <div class="page" id="page-ssl">
+      <div class="action-bar"><span style="font-size:14px;font-weight:700;color:var(--green-dark)">🔒 Certificat SSL</span></div>
+      <div class="page-inner">
+        <div class="page-heading">Certificat SSL</div>
+        <div class="section-block">
+          <div class="section-head" onclick="toggleSection(this)">🔐 Détails du certificat <span class="section-arrow open">▶</span></div>
+          <div>
+            <table class="info-table">
+              <tr><td class="lbl">Domaine</td><td class="val" id="ssl-domain">—</td></tr>
+              <tr><td class="lbl">Émetteur</td><td class="val" id="ssl-issuer">—</td></tr>
+              <tr><td class="lbl">Valide depuis</td><td class="val" id="ssl-from">—</td></tr>
+              <tr><td class="lbl">Expire le</td><td class="val" id="ssl-to">—</td></tr>
+              <tr><td class="lbl">Validité restante</td><td class="val" id="ssl-days">—</td></tr>
+              <tr><td class="lbl">Renouvellement auto.</td><td class="val" id="ssl-auto">—</td></tr>
+            </table>
+          </div>
+        </div>
+        <div class="section-block">
+          <div class="section-head" onclick="toggleSection(this)">📋 Informations techniques <span class="section-arrow open">▶</span></div>
+          <div>
+            <table class="info-table">
+              <tr><td class="lbl">Type de certificat</td><td class="val">DV (Domain Validation)</td></tr>
+              <tr><td class="lbl">Protocole</td><td class="val">TLS 1.2 / TLS 1.3</td></tr>
+              <tr><td class="lbl">Algorithme de signature</td><td class="val">RSA 2048 bits / ECDSA</td></tr>
+              <tr><td class="lbl">HSTS</td><td class="val"><span class="badge gray">À vérifier</span></td></tr>
+            </table>
+          </div>
+        </div>
+        <div class="alert info">ℹ️ Le renouvellement automatique est géré par Let's Encrypt.</div>
+      </div>
+    </div>
+
+    <!-- ═══ PAGE : CONTACT ═══ -->
+    <div class="page" id="page-contacts">
+      <div class="action-bar"><span style="font-size:14px;font-weight:700;color:var(--green-dark)">👤 Contact & contrat</span></div>
+      <div class="page-inner">
+        <div class="page-heading">Référent & contrat</div>
+        <div class="section-block">
+          <div class="section-head" onclick="toggleSection(this)">👤 Administrateur PRONOTE <span class="section-arrow open">▶</span></div>
+          <div>
+            <table class="info-table">
+              <tr><td class="lbl">Nom</td><td class="val" id="c-name">—</td></tr>
+              <tr><td class="lbl">Rôle</td><td class="val" id="c-role">—</td></tr>
+              <tr><td class="lbl">E-mail</td><td class="val" id="c-email">—</td></tr>
+              <tr><td class="lbl">Téléphone</td><td class="val" id="c-phone">—</td></tr>
+            </table>
+          </div>
+        </div>
+        <div class="section-block">
+          <div class="section-head" onclick="toggleSection(this)">📞 Support Index Éducation <span class="section-arrow open">▶</span></div>
+          <div>
+            <table class="info-table">
+              <tr><td class="lbl">Site support</td><td class="val" id="c-support">—</td></tr>
+              <tr><td class="lbl">Téléphone</td><td class="val" id="c-support-phone">—</td></tr>
+            </table>
+          </div>
+        </div>
+        <div class="alert info">ℹ️ Le N° de contrat et la date d'expiration se trouvent dans la section protégée de l'accueil.</div>
+      </div>
+    </div>
+
+  </div><!-- /main-content -->
+</div><!-- /body-wrap -->
+
+<!-- FOOTER -->
+<div class="footer">
+  <span>Administrer le serveur v.2 — <a href="mailto:hello@oxoomy.fr">hello@oxoomy.fr</a></span>
+  <span id="footer-version">—</span>
+</div>
 
 <!-- MODAL -->
 <div class="modal-backdrop" id="modal-backdrop">
   <div class="modal">
-    <div class="modal-header">
-      <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg>
-      Accès protégé
-    </div>
+    <div class="modal-header">🔐 Accès protégé</div>
     <div class="modal-body">
-      <p>Entrez le mot de passe pour afficher les informations protégées.</p>
+      <p>Entrez le mot de passe pour afficher les informations confidentielles.</p>
       <div class="modal-error" id="modal-error">Mot de passe incorrect.</div>
       <input type="password" id="pwd-input" placeholder="Mot de passe" onkeydown="if(event.key==='Enter')checkPwd()">
       <div class="modal-actions">
@@ -756,109 +542,121 @@ async function sha256(str) {
 }
 
 const el = id => document.getElementById(id);
-const v = x => (x === null || x === undefined || x === '') ? '—' : String(x);
+const v  = x  => (x === null || x === undefined || x === '') ? '—' : String(x);
+const lnk = (url, label) => url ? `<a href="${url}" target="_blank">${label || url} ↗</a>` : '—';
+const bdg = (cls, txt)   => `<span class="badge ${cls}">${txt}</span>`;
 
 function smartDate(s) {
   if (!s) return '—';
   const d = new Date(s);
-  if (isNaN(d.getTime())) return s;
-  return d.toLocaleDateString('fr-FR', {day:'2-digit', month:'long', year:'numeric'});
+  return isNaN(d.getTime()) ? s : d.toLocaleDateString('fr-FR', {day:'2-digit', month:'long', year:'numeric'});
 }
 
 function daysUntil(s) {
   if (!s) return null;
-  const d = new Date(s);
-  if (isNaN(d.getTime())) return null;
+  const d = new Date(s); if (isNaN(d.getTime())) return null;
   const now = new Date(); now.setHours(0,0,0,0); d.setHours(0,0,0,0);
   return Math.round((d - now) / 86400000);
 }
 
-function badge(cls, txt) { return `<span class="badge ${cls}">${txt}</span>`; }
-function link(url, label) { return url ? `<a href="${url}" target="_blank">${label || url} ↗</a>` : '—'; }
-
 function populate(c) {
   const g = c.general, s = c.server, ssl = c.ssl, ct = c.contacts;
 
-  el('bc-estab').textContent = g.establishment;
-  el('title-estab').textContent = g.establishment;
+  el('header-subtitle').textContent = g.establishment + ' — ' + g.city;
+  el('page-estab').textContent = g.establishment;
   el('footer-version').textContent = `PRONOTE ${v(g.pronote_version)} — ${g.city}`;
 
-  el('g-estab').textContent = v(g.establishment);
-  el('g-city').textContent = v(g.city);
+  // Général
+  el('g-estab').textContent   = v(g.establishment);
+  el('g-city').textContent    = v(g.city);
   el('g-academy').textContent = v(g.academy);
-  el('g-uai').textContent = v(g.uai);
-  el('g-version').innerHTML = badge('blue', v(g.pronote_version));
+  el('g-uai').textContent     = v(g.uai);
+  el('g-version').innerHTML   = bdg('green', v(g.pronote_version));
+  el('g-version-edt').innerHTML = g.edt_version ? bdg('blue', v(g.edt_version)) : bdg('gray','Non renseigné');
   el('g-install').textContent = smartDate(g.installation_date);
-  el('g-update').textContent = smartDate(g.last_update);
-  el('g-maint').textContent = v(g.maintenance_window);
+  el('g-update').textContent  = smartDate(g.last_update);
+  el('g-maint').textContent   = v(g.maintenance_window);
 
-  el('g-url').innerHTML = link(g.url, g.url);
-  el('g-url-student').innerHTML = link(g.url_student, 'Espace Élèves');
-  el('g-url-parent').innerHTML = link(g.url_parent, 'Espace Parents');
-  el('g-url-teacher').innerHTML = link(g.url_teacher, 'Espace Professeurs');
-  el('g-url-staff').innerHTML = link(g.url_staff, 'Vie scolaire');
+  // Accès
+  el('g-url').innerHTML         = lnk(g.url, g.url);
+  el('g-url-student').innerHTML = lnk(g.url_student, 'Espace Élèves');
+  el('g-url-parent').innerHTML  = lnk(g.url_parent,  'Espace Parents');
+  el('g-url-teacher').innerHTML = lnk(g.url_teacher, 'Espace Professeurs');
+  el('g-url-staff').innerHTML   = lnk(g.url_staff,   'Vie scolaire');
 
+  // Serveur
   el('s-hostname').textContent = v(s.hostname);
-  el('s-os').textContent = v(s.os);
-  el('s-cpu').textContent = v(s.cpu);
-  el('s-ram').textContent = s.ram_gb ? s.ram_gb + ' Go' : '—';
-  el('s-ip-int').textContent = v(s.ip_internal);
-  el('s-ip-pub').textContent = v(s.ip_public);
-  el('s-backup').textContent = [s.backup_schedule, s.backup_location].filter(Boolean).join(' · ') || '—';
-
+  el('s-os').textContent       = v(s.os);
+  el('s-cpu').textContent      = v(s.cpu);
+  el('s-ram').textContent      = s.ram_gb ? s.ram_gb + ' Go' : '—';
+  el('s-ip-int').textContent   = v(s.ip_internal);
+  el('s-ip-pub').textContent   = v(s.ip_public);
+  el('s-backup').textContent   = [s.backup_schedule, s.backup_location].filter(Boolean).join(' · ') || '—';
   if (s.disk_used_gb !== null && s.disk_used_gb !== undefined && s.disk_total_gb) {
     const pct = Math.round(s.disk_used_gb / s.disk_total_gb * 100);
     const cls = pct >= 90 ? 'danger' : pct >= 70 ? 'warn' : 'ok';
-    el('s-disk').innerHTML = `
-      <div class="disk-wrap">
-        <div class="disk-bar-bg"><div class="disk-bar-fill ${cls}" style="width:${pct}%"></div></div>
-        <span>${s.disk_used_gb} / ${s.disk_total_gb} Go (${pct}%)</span>
-      </div>`;
+    el('s-disk').innerHTML = `<div class="disk-wrap"><div class="disk-bar-bg"><div class="disk-bar-fill ${cls}" style="width:${pct}%"></div></div><span>${s.disk_used_gb} / ${s.disk_total_gb} Go (${pct}%)</span></div>`;
   } else {
-    el('s-disk').innerHTML = s.disk_total_gb ? `— / ${s.disk_total_gb} Go` : '—';
+    el('s-disk').textContent = s.disk_total_gb ? `— / ${s.disk_total_gb} Go` : '—';
   }
 
-  el('ssl-domain').textContent = v(ssl.domain);
-  el('ssl-issuer').textContent = v(ssl.issuer);
-  el('ssl-from').textContent = smartDate(ssl.valid_from);
-  el('ssl-to').textContent = smartDate(ssl.valid_until);
-  el('ssl-auto').innerHTML = ssl.auto_renew ? badge('green','✓ Activé') : badge('red','✗ Désactivé');
-
+  // SSL
+  el('ssl-domain').textContent  = v(ssl.domain);
+  el('ssl-issuer').textContent  = v(ssl.issuer);
+  el('ssl-from').textContent    = smartDate(ssl.valid_from);
+  el('ssl-to').textContent      = smartDate(ssl.valid_until);
+  el('ssl-auto').innerHTML      = ssl.auto_renew ? bdg('green','✓ Activé') : bdg('red','✗ Désactivé');
   const days = daysUntil(ssl.valid_until);
-  if (days === null) el('ssl-days').innerHTML = badge('gray', 'En attente');
-  else if (days < 0) el('ssl-days').innerHTML = badge('red', '⚠ Expiré');
-  else if (days < 14) el('ssl-days').innerHTML = badge('red', `⚠ ${days} jours`);
-  else if (days < 30) el('ssl-days').innerHTML = badge('orange', `⚠ ${days} jours`);
-  else el('ssl-days').innerHTML = badge('green', `✓ ${days} jours`);
+  el('ssl-days').innerHTML = days === null ? bdg('gray','En attente') : days < 0 ? bdg('red','⚠ Expiré') : days < 14 ? bdg('red',`⚠ ${days} jours`) : days < 30 ? bdg('orange',`⚠ ${days} jours`) : bdg('green',`✓ ${days} jours`);
 
-  el('c-name').textContent = v(ct.referent_name);
-  el('c-role').textContent = v(ct.referent_role);
-  el('c-email').innerHTML = ct.referent_email ? `<a href="mailto:${ct.referent_email}">${ct.referent_email}</a>` : '—';
-  el('c-phone').textContent = v(ct.referent_phone);
-  el('c-support').innerHTML = link(ct.support_index, 'support.index-education.com');
+  // Contacts
+  el('c-name').textContent         = v(ct.referent_name);
+  el('c-role').textContent         = v(ct.referent_role);
+  el('c-email').innerHTML          = ct.referent_email ? `<a href="mailto:${ct.referent_email}">${ct.referent_email}</a>` : '—';
+  el('c-phone').textContent        = v(ct.referent_phone);
+  el('c-support').innerHTML        = lnk(ct.support_index, 'support.index-education.com');
   el('c-support-phone').textContent = v(ct.support_phone);
-  el('c-contract').textContent = v(ct.contract_number);
-  el('c-expiry').textContent = smartDate(ct.contract_expiry);
 
-  // Status bar
+  // Clients page
+  el('client-url-win').textContent  = g.url || '—';
+  el('client-url-mac').textContent  = g.url || '—';
+  el('web-url-student').textContent = g.url_student || '—';
+  el('web-url-student').href        = g.url_student || '#';
+  el('web-url-parent').textContent  = g.url_parent  || '—';
+  el('web-url-parent').href         = g.url_parent  || '#';
+  el('web-url-teacher').textContent = g.url_teacher || '—';
+  el('web-url-teacher').href        = g.url_teacher || '#';
+  el('mobile-url').textContent      = g.url || '—';
+  el('rdp-ip').textContent          = s.ip_internal || '—';
+  el('client-edt-version').textContent = g.edt_version || 'Non renseignée';
+
+  // Status row
   const sslOk = days === null ? 'gray' : days > 30 ? 'green' : days > 0 ? 'orange' : 'red';
-  el('status-bar').innerHTML = `
-    <div class="status-chip"><span class="dot ${g.url ? 'red' : 'gray'}"></span> Serveur PRONOTE</div>
-    <div class="status-chip"><span class="dot ${g.url ? 'gray' : 'gray'}"></span> PRONOTE.net</div>
+  el('status-row').innerHTML = `
+    <div class="status-chip"><span class="dot red"></span> Serveur PRONOTE</div>
+    <div class="status-chip"><span class="dot gray"></span> PRONOTE.net</div>
     <div class="status-chip"><span class="dot ${sslOk}"></span> Certificat SSL</div>
-    <div class="status-chip"><span class="dot ${ssl.auto_renew ? 'green' : 'orange'}"></span> Renouvellement auto.</div>
-    <div class="status-chip"><span class="dot ${s.backup_schedule ? 'red' : 'gray'}"></span> Sauvegarde</div>`;
+    <div class="status-chip"><span class="dot ${ssl.auto_renew ? 'green' : 'orange'}"></span> Renouvellement SSL auto.</div>
+    <div class="status-chip"><span class="dot red"></span> Sauvegarde</div>`;
 }
 
-function populateProtected(p) {
-  el('p-login').textContent = v(p.admin_login);
-  el('p-hint').textContent = v(p.admin_password_hint);
-  el('p-db').textContent = p.db_host ? `${p.db_host}:${p.db_port} / ${p.db_name}` : '—';
-  el('p-db-user').textContent = v(p.db_user);
-  el('p-smtp').textContent = p.smtp_host ? `${p.smtp_host}:${p.smtp_port}` : '—';
+function populateProtected(p, ct) {
+  el('p-login').textContent    = v(p.admin_login);
+  el('p-hint').textContent     = v(p.admin_password_hint);
+  el('p-db').textContent       = p.db_host ? `${p.db_host}:${p.db_port} / ${p.db_name}` : '—';
+  el('p-db-user').textContent  = v(p.db_user);
+  el('p-smtp').textContent     = p.smtp_host ? `${p.smtp_host}:${p.smtp_port}` : '—';
   el('p-smtp-user').textContent = v(p.smtp_user);
-  el('p-api').textContent = v(p.api_key_index);
-  el('p-ports').textContent = `VNC :${p.vnc_port} · RDP :${p.rdp_port}`;
+  el('c-contract').textContent = v(ct.contract_number);
+  el('c-expiry').textContent   = smartDate(ct.contract_expiry);
+}
+
+function showPage(id, navEl) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  el('page-' + id).classList.add('active');
+  if (navEl) navEl.classList.add('active');
+  return false;
 }
 
 function toggleSection(head) {
@@ -866,7 +664,7 @@ function toggleSection(head) {
   const arrow = head.querySelector('.section-arrow');
   const open = body.style.display !== 'none';
   body.style.display = open ? 'none' : '';
-  arrow.classList.toggle('open', !open);
+  if (arrow) arrow.classList.toggle('open', !open);
 }
 
 function openModal() {
@@ -882,10 +680,11 @@ async function checkPwd() {
   const hash = await sha256(el('pwd-input').value);
   if (hash === cfg.protected.password_hash) {
     unlocked = true;
-    populateProtected(cfg.protected);
+    populateProtected(cfg.protected, cfg.contacts);
     el('locked-veil').classList.add('hidden');
     el('blur-content').classList.add('clear');
-    el('unlock-btn').classList.add('unlocked');
+    el('unlock-btn').classList.add('locked-open');
+    el('unlock-btn').classList.remove('lock');
     el('lock-icon').textContent = '🔓';
     el('unlock-label').textContent = 'Verrouiller';
     closeModal();
@@ -900,30 +699,87 @@ el('unlock-btn').addEventListener('click', function() {
     unlocked = false;
     el('locked-veil').classList.remove('hidden');
     el('blur-content').classList.remove('clear');
-    el('unlock-btn').classList.remove('unlocked');
+    el('unlock-btn').classList.remove('locked-open');
+    el('unlock-btn').classList.add('lock');
     el('lock-icon').textContent = '🔒';
     el('unlock-label').textContent = 'Accès protégé';
-    ['p-login','p-hint','p-db','p-db-user','p-smtp','p-smtp-user','p-api','p-ports']
+    ['p-login','p-hint','p-db','p-db-user','p-smtp','p-smtp-user','c-contract','c-expiry']
       .forEach(id => el(id).textContent = '—');
   } else { openModal(); }
 });
 
 el('modal-backdrop').addEventListener('click', e => { if (e.target === el('modal-backdrop')) closeModal(); });
 
-async function loadConfig() {
-  try {
-    const r = await fetch('config.json');
-    if (!r.ok) throw new Error('HTTP ' + r.status);
-    cfg = await r.json();
-    populate(cfg);
-  } catch(e) {
-    const b = el('error-banner');
-    b.style.display = 'block';
-    b.textContent = `Impossible de charger config.json : ${e.message}. Lancez le fichier via un serveur local (python -m http.server ou Live Server).`;
+// ─────────────────────────────────────────────
+// CONFIGURATION — modifiez directement ici
+// Mot de passe par défaut : 123456
+// Pour changer : générez un hash SHA-256 sur
+// https://emn178.github.io/online-tools/sha256/
+// ─────────────────────────────────────────────
+const CONFIG = {
+  "general": {
+    "establishment": "LYCEE POLYVALENT F. MITTERRAND",
+    "city": "AUBERVILLIERS",
+    "academy": "Académie de Créteil",
+    "uai": "0930118A",
+    "pronote_version": "MAJ prochaine vers 2026.0.1",
+    "edt_version": "",
+    "url": "https://pronote.oxoomy.fr/",
+    "url_parent": "https://pronote.oxoomy.fr/parent.html",
+    "url_student": "https://pronote.oxoomy.fr/eleve.html",
+    "url_teacher": "https://pronote.oxoomy.fr/professeur.html",
+    "url_staff": "https://pronote.oxoomy.fr/viescolaire.html",
+    "installation_date": "",
+    "last_update": "",
+    "maintenance_window": "du 14/06 au 07/07"
+  },
+  "server": {
+    "hostname": "srv-pronote-01",
+    "ip_internal": "192.168.1.26",
+    "ip_public": "",
+    "os": "Windows 11",
+    "cpu": "AMD Ryzen 5",
+    "ram_gb": 8,
+    "disk_total_gb": 128,
+    "disk_used_gb": null,
+    "backup_schedule": "Toutes les heures",
+    "backup_location": "Serveur"
+  },
+  "ssl": {
+    "issuer": "Let's Encrypt",
+    "domain": "pronote.oxoomy.fr",
+    "valid_from": "",
+    "valid_until": "",
+    "auto_renew": true
+  },
+  "contacts": {
+    "referent_name": "M. KANOUNI Farouk",
+    "referent_role": "Administrateur PRONOTE",
+    "referent_email": "farouk.kanouni@pedagogie.groupe-citadelle.fr",
+    "referent_phone": "",
+    "support_index": "https://support.index-education.com",
+    "support_phone": "03 26 25 00 00",
+    "contract_number": "",
+    "contract_expiry": ""
+  },
+  "protected": {
+    "password_hash": "8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92",
+    "admin_login": "",
+    "admin_password_hint": "Voir coffre-fort KeePass — entrée PRONOTE_ADMIN",
+    "db_host": "127.0.0.1",
+    "db_port": 3306,
+    "db_name": "pronote_prod",
+    "db_user": "pronote_user",
+    "smtp_host": "smtp.ac-lyon.fr",
+    "smtp_port": 587,
+    "smtp_user": "noreply@lycee-jeanmoulin.fr",
+    "vnc_port": 5900,
+    "rdp_port": 3389
   }
-}
+};
 
-loadConfig();
+cfg = CONFIG;
+populate(cfg);
 </script>
 </body>
 </html>
