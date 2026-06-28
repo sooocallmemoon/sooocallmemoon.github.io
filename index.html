@@ -482,7 +482,7 @@ body {
 <!-- SIDEBAR -->
 <nav class="sidebar">
   <div class="sidebar-logo">
-    <span>P</span>RONOTE
+    <span>ALS</span>V.2
   </div>
 
   <a class="nav-item active" href="#" title="Accueil">
@@ -717,7 +717,7 @@ body {
     <div class="section-block">
       <div class="section-head" style="background:#fff3e0;border-color:#ffcc80;color:#7a3e00" onclick="toggleSection(this)">
         <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg>
-        Informations concernant votre abonnement.
+        Informations concernant votre abonnement
         <svg class="section-arrow open" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg>
       </div>
       <div class="section-body locked-wrap" id="protected-wrap">
@@ -865,6 +865,7 @@ function populate(c) {
   const sslOk = days === null ? 'gray' : days > 30 ? 'green' : days > 0 ? 'orange' : 'red';
   el('status-bar').innerHTML = `
     <div class="status-chip"><span class="dot ${g.url ? 'red' : 'gray'}"></span> Serveur PRONOTE</div>
+    <div class="status-chip"><span class="dot ${g.url ? 'gray' : 'gray'}"></span> PRONOTE.net</div>
     <div class="status-chip"><span class="dot ${sslOk}"></span> Certificat SSL</div>
     <div class="status-chip"><span class="dot ${ssl.auto_renew ? 'green' : 'orange'}"></span> Renouvellement auto.</div>
     <div class="status-chip"><span class="dot ${s.backup_schedule ? 'red' : 'gray'}"></span> Sauvegarde</div>`;
