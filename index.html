@@ -183,6 +183,9 @@ body {
 
 /* ── ERROR BANNER ── */
 #error-banner { display: none; background: #ffebee; border: 1px solid #ef9a9a; color: #c62828; padding: 10px 16px; font-size: 13px; border-radius: var(--radius); margin-bottom: 14px; }
+</style>
+</head>
+<body>
 
 
 <!-- HEADER -->
@@ -421,7 +424,7 @@ body {
               <li><span class="step-num">3</span> Version installée : <span id="client-edt-version" style="font-family:monospace;background:#f5f5f5;padding:1px 6px;border-radius:3px">—</span></li>
             </ul>
     	    </div>
-
+        </div>
 
         <div class="section-block">
           <div class="section-head" onclick="toggleSection(this)">📋 Prérequis système <span class="section-arrow open">▶</span></div>
@@ -612,6 +615,7 @@ function populate(c) {
   el('web-url-teacher').textContent = g.url_teacher || '—';
   el('web-url-teacher').href        = g.url_teacher || '#';
   el('mobile-url').textContent      = g.url || '—';
+  if(el('rdp-ip')) el('rdp-ip').textContent = s.ip_internal || '—';
   el('client-edt-version').textContent = g.edt_version || 'Non renseignée';
 
   // Status row
@@ -701,7 +705,7 @@ const CONFIG = {
     "academy": "Académie de Créteil",
     "uai": "0930118A",
     "pronote_version": "MAJ prochaine vers 2026.0.1",
-    "edt_version": "2026.0.1",
+    "edt_version": "",
     "url": "https://pronote.oxoomy.fr/",
     "url_parent": "https://pronote.oxoomy.fr/parent.html",
     "url_student": "https://pronote.oxoomy.fr/eleve.html",
@@ -743,14 +747,14 @@ const CONFIG = {
   "protected": {
     "password_hash": "8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92",
     "admin_login": "",
-    "admin_password_hint": "UAI",
+    "admin_password_hint": "Voir coffre-fort KeePass — entrée PRONOTE_ADMIN",
     "db_host": "127.0.0.1",
-    "db_port": 80,
+    "db_port": 3306,
     "db_name": "pronote_prod",
     "db_user": "pronote_user",
     "smtp_host": "smtp.ac-lyon.fr",
     "smtp_port": 587,
-    "smtp_user": "ce.0930118A@pedagogie.groupe-citadelle.fr",
+    "smtp_user": "noreply@lycee-jeanmoulin.fr",
     "vnc_port": 5900,
     "rdp_port": 3389
   }
