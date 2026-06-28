@@ -55,7 +55,7 @@ body {
 .body-wrap { display: flex; flex: 1; }
 
 /* ── SIDEBAR ── */
-.sidebar { width: var(--sidebar-w); background: var(--sidebar-bg); display: flex; flex-direction: column; padding: 12px 0; gap: 2px; min-height: calc(100vh - 102px); }
+.sidebar { width: var(--sidebar-w); background: var(--sidebar-bg); display: flex; flex-direction: column; padding: 12px 0; gap: 2px; }
 .nav-item { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px; padding: 12px 8px; cursor: pointer; text-decoration: none; color: rgba(255,255,255,0.8); transition: background 0.15s; border-left: 3px solid transparent; }
 .nav-item:hover { background: rgba(255,255,255,0.1); color: white; }
 .nav-item.active { background: rgba(255,255,255,0.15); color: white; border-left-color: #6dcf9a; }
@@ -289,7 +289,7 @@ body {
               <tr><td class="lbl">Académie</td><td class="val" id="g-academy">—</td></tr>
               <tr><td class="lbl">Code UAI</td><td class="val" id="g-uai">—</td></tr>
               <tr><td class="lbl">Version PRONOTE</td><td class="val" id="g-version">—</td></tr>
-              <tr><td class="lbl">Version EDT</td><td class="val" id="g-version">—</td></tr>
+              <tr><td class="lbl">Version EDT</td><td class="val" id="g-version-edt">—</td></tr>
               <tr><td class="lbl">Date d'installation du serveur</td><td class="val" id="g-install">—</td></tr>
               <tr><td class="lbl">Dernière mise à jour</td><td class="val" id="g-update">—</td></tr>
               <tr><td class="lbl">Maintenance</td><td class="val" id="g-maint">—</td></tr>
@@ -627,7 +627,6 @@ function populate(c) {
   el('web-url-teacher').textContent = g.url_teacher || '—';
   el('web-url-teacher').href        = g.url_teacher || '#';
   el('mobile-url').textContent      = g.url || '—';
-  el('rdp-ip').textContent          = s.ip_internal || '—';
   el('client-edt-version').textContent = g.edt_version || 'Non renseignée';
 
   // Status row
@@ -710,12 +709,6 @@ el('unlock-btn').addEventListener('click', function() {
 
 el('modal-backdrop').addEventListener('click', e => { if (e.target === el('modal-backdrop')) closeModal(); });
 
-// ─────────────────────────────────────────────
-// CONFIGURATION — modifiez directement ici
-// Mot de passe par défaut : 123456
-// Pour changer : générez un hash SHA-256 sur
-// https://emn178.github.io/online-tools/sha256/
-// ─────────────────────────────────────────────
 const CONFIG = {
   "general": {
     "establishment": "LYCEE POLYVALENT F. MITTERRAND",
@@ -765,14 +758,14 @@ const CONFIG = {
   "protected": {
     "password_hash": "8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92",
     "admin_login": "",
-    "admin_password_hint": "Voir coffre-fort KeePass — entrée PRONOTE_ADMIN",
+    "admin_password_hint": "UAI",
     "db_host": "127.0.0.1",
-    "db_port": 3306,
+    "db_port": 80,
     "db_name": "pronote_prod",
     "db_user": "pronote_user",
     "smtp_host": "smtp.ac-lyon.fr",
     "smtp_port": 587,
-    "smtp_user": "noreply@lycee-jeanmoulin.fr",
+    "smtp_user": "ce.0930118A@pedagogie.groupe-citadelle.fr",
     "vnc_port": 5900,
     "rdp_port": 3389
   }
