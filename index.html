@@ -688,20 +688,23 @@ body {
           <tr><td class="lbl">Téléphone</td><td class="val" id="c-phone">—</td></tr>
           <tr><td class="lbl">Support Index Éducation</td><td class="val" id="c-support">—</td></tr>
           <tr><td class="lbl">Tél. support</td><td class="val" id="c-support-phone">—</td></tr>
-          <tr><td class="lbl">N° contrat</td><td class="val" id="c-contract">—</td></tr>
-          <tr><td class="lbl">Expiration contrat</td><td class="val" id="c-expiry">—</td></tr>
         </table>
       </div>
     </div>
 
-    <!-- SECTION PROTÉGÉE -->
+  <!-- SECTION PROTÉGÉE -->
     <div class="section-block">
       <div class="section-head" style="background:#fff3e0;border-color:#ffcc80;color:#7a3e00" onclick="toggleSection(this)">
         <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg>
-        Informations concernant votre abonnement
+        Informations protégées
         <svg class="section-arrow open" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg>
       </div>
-        <div class="section-body">
+      <div class="section-body locked-wrap" id="protected-wrap">
+        <div class="locked-veil" id="locked-veil" onclick="openModal()">
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg>
+          Section verrouillée — cliquer pour déverrouiller
+        </div>
+        <div class="blur-content" id="blur-content">
           <table class="info-table">
             <tr><td class="lbl">Login admin PRONOTE</td><td class="val" id="p-login">—</td></tr>
             <tr><td class="lbl">Établissement identifié via</td><td class="val" id="p-hint">—</td></tr>
