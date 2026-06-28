@@ -183,14 +183,6 @@ body {
 /* ── ERROR BANNER ── */
 #error-banner { display: none; background: #ffebee; border: 1px solid #ef9a9a; color: #c62828; padding: 10px 16px; font-size: 13px; border-radius: var(--radius); margin-bottom: 14px; }
 
-/* ── FOOTER ── */
-.footer { background: var(--green-dark); color: rgba(255,255,255,0.65); font-size: 12px; padding: 10px 24px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
-.footer a { color: rgba(255,255,255,0.7); text-decoration: none; }
-.footer a:hover { color: white; }
-</style>
-</head>
-<body>
-
 <!-- HEADER -->
 <div class="header">
   <div class="header-status">✓</div>
@@ -516,12 +508,6 @@ body {
   </div><!-- /main-content -->
 </div><!-- /body-wrap -->
 
-<!-- FOOTER -->
-<div class="footer">
-  <span>📚 Administrer le serveur V.2 — <a href="mailto:hello@oxoomy.fr">hello@oxoomy.fr</a></span>
-  <span id="footer-version">—</span>
-</div>
-
 <!-- MODAL -->
 <div class="modal-backdrop" id="modal-backdrop">
   <div class="modal">
@@ -569,7 +555,6 @@ function populate(c) {
 
   el('header-subtitle').textContent = g.establishment + ' — ' + g.city;
   el('page-estab').textContent = g.establishment;
-  el('footer-version').textContent = `PRONOTE ${v(g.pronote_version)} — ${g.city}`;
 
   // Général
   el('g-estab').textContent   = v(g.establishment);
