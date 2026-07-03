@@ -253,7 +253,7 @@ body {
         <button class="action-btn primary">⏻ Publier la base</button>
         <div class="status-tag"><span class="dot red"></span> Non publiée</div>
         <div class="action-sep"></div>
-        <span style="font-size:13px;color:#666">Base : <strong>-</strong></span>
+        <span style="font-size:13px;color:#666">Base : <strong>Année 2026-2027</strong></span>
         <div style="flex:1"></div>
         <button class="action-btn lock" id="unlock-btn">
           <span id="lock-icon">🔒</span> <span id="unlock-label">Accès protégé</span>
@@ -379,6 +379,9 @@ body {
               <li><span class="step-num">3</span> Renseigner l'URL du serveur : <code id="client-url-win">—</code></li>
               <li><span class="step-num">4</span> Valider et tester la connexion</li>
             </ul>
+            <div class="alert warning" style="margin-top:10px;margin-bottom:0;padding:8px 12px">
+              ⚠️ Le lien d'installation sera prochainement disponible depuis Administrer le serveur.
+            </div>
           </div>
 
           <div class="install-card">
@@ -395,8 +398,8 @@ body {
 
           <div class="install-card">
             <div class="install-card-icon">🌐</div>
-            <h3>Accès navigateur (web)</h3>
-            <p>Accès sans installation via navigateur — recommandé pour élèves et parents.</p>
+            <h3>Accès PRONOTE.net (web)</h3>
+            <p>Accès sans installation via navigateur</p>
             <ul class="step-list">
               <li><span class="step-num">1</span> Ouvrir Chrome, Firefox ou Edge</li>
               <li><span class="step-num">2</span> Naviguer vers l'URL correspondant à son profil</li>
@@ -429,13 +432,10 @@ body {
             <h3>Client EDT</h3>
             <p>Accès au logiciel EDT pour la gestion des emplois du temps.</p>
             <ul class="step-list">
-              <li><span class="step-num">1</span> Télécharger EDT Monoposte 2026 depuis Index Éducation</li>
+              <li><span class="step-num">1</span> Télécharger le Client EDT 2026 depuis Index Éducation</li>
               <li><span class="step-num">2</span> Installer sur le poste dédié de l'établissement</li>
               <li><span class="step-num">3</span> Version installée : <span id="client-edt-version" style="font-family:monospace;background:#f5f5f5;padding:1px 6px;border-radius:3px">—</span></li>
             </ul>
-            <div class="alert warning" style="margin-top:10px;margin-bottom:0;padding:8px 12px">
-              ⚠️ En attente de la version 2026.0.1 — utiliser EDT Monoposte 2026 en attendant.
-            </div>
           </div>
 
           <div class="install-card">
@@ -741,16 +741,16 @@ const CONFIG = {
     "city": "AUBERVILLIERS",
     "academy": "Académie de Créteil",
     "uai": "0930118A",
-    "pronote_version": "MAJ prochaine vers 2026.0.1",
-    "edt_version": "2026.0.1",
+    "pronote_version": "2026.1.3",
+    "edt_version": "2026.1.3",
     "url": "https://pronote.oxoomy.fr/",
     "url_parent": "https://pronote.oxoomy.fr/parent.html",
     "url_student": "https://pronote.oxoomy.fr/eleve.html",
     "url_teacher": "https://pronote.oxoomy.fr/professeur.html",
     "url_staff": "https://pronote.oxoomy.fr/viescolaire.html",
-    "installation_date": "",
-    "last_update": "",
-    "maintenance_window": "du 14/06 au 07/07"
+    "installation_date": "2026-07-03",
+    "last_update": "2026-07-03",
+    "maintenance_window": "Aucune maintenance n'est prévue"
   },
   "server": {
     "hostname": "srv-pronote-01",
