@@ -590,7 +590,7 @@ function populate(c) {
   el('g-city').textContent    = v(g.city);
   el('g-academy').textContent = v(g.academy);
   el('g-uai').textContent     = v(g.uai);
-  el('g-version').innerHTML   = bdg('blue', v(g.pronote_version));
+  el('g-version').innerHTML   = bdg('green', v(g.pronote_version));
   el('g-version-edt').innerHTML = g.edt_version ? bdg('blue', v(g.edt_version)) : bdg('gray','Non renseigné');
   el('g-install').textContent = smartDate(g.installation_date);
   el('g-update').textContent  = smartDate(g.last_update);
@@ -652,11 +652,11 @@ function populate(c) {
   // Status row
   const sslOk = days === null ? 'gray' : days > 30 ? 'green' : days > 0 ? 'orange' : 'red';
   el('status-row').innerHTML = `
-    <div class="status-chip"><span class="dot red"></span> Serveur PRONOTE</div>
-    <div class="status-chip"><span class="dot gray"></span> PRONOTE.net</div>
+    <div class="status-chip"><span class="dot green"></span> Serveur PRONOTE</div>
+    <div class="status-chip"><span class="dot green"></span> PRONOTE.net</div>
     <div class="status-chip"><span class="dot ${sslOk}"></span> Certificat SSL</div>
     <div class="status-chip"><span class="dot ${ssl.auto_renew ? 'green' : 'orange'}"></span> Renouvellement SSL auto.</div>
-    <div class="status-chip"><span class="dot red"></span> Sauvegarde</div>`;
+    <div class="status-chip"><span class="dot green"></span> Sauvegarde</div>`;
 }
 
 function populateProtected(p, ct) {
